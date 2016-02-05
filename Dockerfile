@@ -1,3 +1,6 @@
+#Run docker command: docker run -v /Users/<username>/projects/coding1st:/src -d -p 3000:3000 coding1st:0.1
+
+# Ubuntu machine
 FROM ubuntu:latest
 
 # Installing node.
