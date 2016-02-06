@@ -1,29 +1,33 @@
-# Ubuntu machine
+# Ubuntu machine.
 FROM ubuntu:latest
 
-# Contact Support
+# Contact Support.
 MAINTAINER Carlos Santana <carlos@milkzoft.com>
 
-# Installing node.
+# Installing nodejs 5.X.
 RUN apt-get update
 RUN apt-get install -y build-essential curl
 RUN curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
 RUN apt-get install -y nodejs
 
+RUN mkdir -p /app
+RUN mkdir -p /app/src
+RUN mkdir -p /app/logs
+
 # Copying only package.json to avoid re-install modules when this file has changed.
-COPY ./package.json src/
+COPY ./package.json app/
 
 # Installing all NPM dependencies.
-RUN cd src && npm install
+RUN cd app
 
-# Installing hotnode to restart node server every time a file has changed.
-RUN npm install -g hotnode
+# Installing pm2 to restart node server every time a file has changed.
+RUN npm install -g pm2
 
-# Copying all the content to the /src folder inside docker image.
-COPY . /src
+# Copying all the content to the /app folder inside docker image.
+COPY . /app
 
 # Selecting our workdir.
-WORKDIR src/
+WORKDIR app/
 
 # Executing command npm start.
-CMD ["npm", "start"]
+CMD ["pm2", "start", "pm2.json", "--no-daemon"]
