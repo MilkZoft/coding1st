@@ -1,0 +1,44 @@
+---
+production: &default
+  serverPort: 3000
+  baseUrl: http://www.coding1st.com
+  baseApi: /api/
+  views:
+    engine: .hbs
+    extension: .hbs
+    layout: main
+  html:
+    minify: true
+    css:
+      stylusPrecompile: true
+      compress: true
+  controllers:
+    default: home
+  languages:
+    default: en
+    list: [en, es]
+  security:
+    secret: c0d1ing1st.com
+  session:
+    cookieDomain: .coding1st.com
+    maxAge: 900000
+    cookiePrefix: 'c1Session_'
+    path: '/'
+    httpOnly: true
+
+stage: &stage
+  <<: *default
+  baseUrl: http://stage.coding1st.com
+
+latest: &latest
+  <<: *stage
+  baseUrl: http://latest.coding1st.com
+
+development:
+  <<: *latest
+  baseUrl: http://local.coding1st.com
+  html:
+    minify: false
+    css:
+      stylusPrecompile: false
+      compress: false
