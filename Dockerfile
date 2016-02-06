@@ -1,11 +1,14 @@
-#Run docker command: docker run -v /Users/<username>/projects/coding1st:/src -d -p 3000:3000 coding1st:0.1
-
 # Ubuntu machine
 FROM ubuntu:latest
 
+# Contact Support
+MAINTAINER Carlos Santana <carlos@milkzoft.com>
+
 # Installing node.
 RUN apt-get update
-RUN apt-get install -y nodejs nodejs-legacy npm
+RUN apt-get install -y build-essential curl
+RUN curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
+RUN apt-get install -y nodejs
 
 # Copying only package.json to avoid re-install modules when this file has changed.
 COPY ./package.json src/
