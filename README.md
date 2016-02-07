@@ -27,8 +27,11 @@ Carlos Santana <carlos@milkzoft.com>
     This will return something like (copy & paste this information to your .bash_profile):
 
     `export DOCKER_TLS_VERIFY="1"`
+
     `export DOCKER_HOST="tcp://192.168.99.100:2376"`
+    
     `export DOCKER_CERT_PATH="/Users/<username>/.docker/machine/machines/dev"`
+    
     `export DOCKER_MACHINE_NAME="dev"`
 
 7. Clone the repository under you projects folder (be sure you are on "develop" branch).
