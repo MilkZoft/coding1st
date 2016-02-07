@@ -78,4 +78,4 @@ Carlos Santana <carlos@milkzoft.com>
 
 ## Troubleshooting
 
-If you cannot hit the website, try to open http://docker.me:9999 or see the docker logs to see if you have some error: `docker logs coding1st-container
+If you cannot hit the website, try to open http://docker.me:9999 or see the docker logs to see if you have some error: `docker logs coding1st-container`
