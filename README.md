@@ -63,7 +63,8 @@ Carlos Santana <carlos@milkzoft.com>
 13. Update your hosts file(s). Add the following lines to the bottom of `/etc/hosts` AND `/etc/hosts.ac` (if hosts.ac exists on your machine):
 
     `127.0.0.1 local.coding1st.com`
-    `192.168.99.100 docker.me (this IP is the DOCKER_HOST)
+    
+    `192.168.99.100 docker.me (this IP is the DOCKER_HOST)`
 
 14. Include the proxy file into the `/etc/apache2/extra/httpd-vhosts.conf` file then restart Apache service.
 
