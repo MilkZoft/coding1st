@@ -1,6 +1,9 @@
 #!/bin/bash
-read -p "Host Port: " hostPort
-read -p "Docker Image Name: " imageName
+echo "Host Port:"
+read hostPort
+
+echo "Docker Image Name:"
+read imageName
 
 projectPath="$(dirname "$(pwd)")"
 containerName="$imageName-container"
