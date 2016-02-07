@@ -10,15 +10,17 @@ Carlos Santana <carlos@milkzoft.com>
 
 2. Install the latest version of VirtualBox (<https://www.virtualbox.org/>).
 
-3. Create a new Docker Machine (dev).
+3. Install the latest version of Node.js (<https://www.nodejs.org/>).
+
+4. Create a new Docker Machine (dev).
 
     `docker-machine create --driver virtualbox dev`
   
-4. Execute the follow command to switch to the new dev docker machine:
+5. Execute the follow command to switch to the new dev docker machine:
 
     `eval "$(docker-machine env dev)"`
 
-5. Execute the follow command and copy the information to your .bash_profile:
+6. Execute the follow command and copy the information to your .bash_profile:
 
     `docker-machine env dev`
 
@@ -29,46 +31,46 @@ Carlos Santana <carlos@milkzoft.com>
      export DOCKER_CERT_PATH="/Users/czantany/.docker/machine/machines/default"
      export DOCKER_MACHINE_NAME="default"`
 
-6. Clone the repository under you projects folder (be sure you are on "develop" branch).
+7. Clone the repository under you projects folder (be sure you are on "develop" branch).
 
     `git clone git@github.com:MilkZoft/coding1st.git`
 
-7. Install global dependencies:
+8. Install global dependencies:
 
     `npm install -g gulp bower stylus
 
-8. Execute the follow gulp command:
+9. Execute the follow gulp command:
 
     `gulp docker-build`
 
     This will ask you the name of the image (Type Docker Image Name:), type: `coding1st` (this process can take 10 or 15 minutes).
 
-9. Install local dependencies:
+10. Install local dependencies:
   
     `npm install`
 
-10. Execute `bower install` to get all the components.
+11. Execute `bower install` to get all the components.
 
-11. Execute the follow gulp command:
+12. Execute the follow gulp command:
 
     `gulp docker-run`
 
     This will ask you the host port (type `9999`), and then will ask you for the Docker Image that you created before (type `coding1st`).
 
-12. Update your hosts file(s). Add the following lines to the bottom of `/etc/hosts` AND `/etc/hosts.ac` (if hosts.ac exists on your machine):
+13. Update your hosts file(s). Add the following lines to the bottom of `/etc/hosts` AND `/etc/hosts.ac` (if hosts.ac exists on your machine):
 
     `127.0.0.1 local.coding1st.com`
     `192.168.99.100 docker.me (this IP is the DOCKER_HOST)
 
-13. Include the proxy file into the `/etc/apache2/extra/httpd-vhosts.conf` file then restart Apache service.
+14. Include the proxy file into the `/etc/apache2/extra/httpd-vhosts.conf` file then restart Apache service.
 
     `Include /Users/<username>/projects/coding1st/001-coding1st-proxy.conf`
 
-14. Restart apache.
+15. Restart apache.
 
     `sudo apachectl restart`
 
-15. Run the site at (<http://local.coding1st.com>).
+16. Run the site at (<http://local.coding1st.com>).
 
 ## Troubleshooting
 
