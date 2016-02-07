@@ -24,7 +24,7 @@ Carlos Santana <carlos@milkzoft.com>
 
     `docker-machine env dev`
 
-    This will return something like (copy & paste this information to your .bash_profile):
+    This will return something like this (copy & paste your information to your .bash_profile):
 
     `export DOCKER_TLS_VERIFY="1"`
 
