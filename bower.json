@@ -4,6 +4,7 @@
   "author": "Carlos Santana",
   "license": "MIT",
   "dependencies": {
-    "font-awesome": "latest"
+    "font-awesome": "latest",
+    "normalize-css": "normalize.css#^3.0.3"
   }
 }
