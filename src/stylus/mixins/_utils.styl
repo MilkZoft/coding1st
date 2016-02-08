@@ -1,0 +1,182 @@
+/**
+ * @file _utils.styl
+ * @author Carlos Santana
+ * @css-for Chrome, Firefox, Safari & Internet Edge
+ */
+
+/**
+ * @mixin border
+ * @description Set a border
+ * @param {string} $color Border color
+ * @param {pixel} $size Border size
+ * @param {string} $type Border type
+ * @css border 1px solid red
+ */
+border($color = red, $size = 1px, $type = solid)
+    border $size $type $color
+
+/**
+ * @mixin borderRadius
+ * @description Set a border customize border radius
+ * @param {pixel} $radius Border radius
+ * @param {array} $args Border radius positions
+ * @css border-radius 5px
+ */
+borderRadius($radius = 5px, $args...)
+    if length($args) == 3
+        border-top-right-radius $radius
+        border-bottom-right-radius $args[0]
+        border-bottom-left-radius $args[1]
+        border-top-left-radius $args[2]
+    else if length($args) == 2
+        border-top-right-radius $radius
+        border-bottom-right-radius $args[0]
+        border-bottom-left-radius $args[1]
+    else if length($args) == 1
+        border-top-right-radius $radius
+        border-bottom-right-radius $args[0]
+    else
+        border-radius $radius
+
+/**
+ * @mixin centerElement
+ * @description Center an element (including images)
+ * @param {number} $margin Margin (normally is 0)
+ * @param {boolean|string} $width If is different than false, then sets a width
+ * @param {boolean|string} $display If is different than false, then sets a display (block, inline or inline-block)
+ * @css margin 0 auto
+ */
+center($margin = 0, $width = false, $display = false)
+    if $display != false
+        display $display
+    margin $margin auto
+    if $width != false
+        width $width
+
+/**
+ * @mixin clearfix
+ * @description Clearfix hack for floating elements
+ */
+clearfix()
+    *zoom 1
+    &:after
+        content ''
+        display block
+        clear both
+        height 0
+
+/**
+ * @mixin cursor
+ * @description Set the cursor type
+ * @param {string} $type Cursor type
+ */
+cursor($type = pointer)
+    cursor $type
+
+/**
+ * @mixin font
+ * @description Sets the font family
+ * @param {string} $font Name of the font
+ * @param {boolean|string} $size If is different than false, then sets a font-size
+ * @param {boolean|string} $color If is different than false, then sets a color
+ * @css font-family <font>, sans-serif
+ */
+font($font, $size = false, $color = false)
+    if $color != false
+        color $color
+    font-family $font, sans-serif
+    if $size != false
+        font-size $size
+
+/**
+ * @mixin fontFace
+ * @description Sets the font face for a new font
+ * @param {string} $fontFamily Name of the font
+ * @param {string} $fontFile Font filename
+ */
+fontFace($fontFamily, $fontFile)
+    @font-face
+        font-family $fontFamily
+        src url('../assets/fonts/' + $fontFamily + '/' + $fontFile + '.eot')
+        src url('../assets/fonts/' + $fontFamily + '/' + $fontFile + '.eot?#iefix') format('embedded-opentype'),
+            url('../assets/fonts/' + $fontFamily + '/' + $fontFile + '.woff2') format('woff2'),
+            url('../assets/fonts/' + $fontFamily + '/' + $fontFile + '.woff') format('woff'),
+            url('../assets/fonts/' + $fontFamily + '/' + $fontFile + '.ttf') format('truetype'),
+            url('../assets/fonts/' + $fontFamily + '/' + $fontFile + '.svg#' + $fontFamily) format('svg');
+        font-weight $fontWeightNormal
+        font-style normal
+
+/**
+ * @mixin icon
+ * @description Display a Font Awesome icon
+ * @param {string} $code Icon code
+ * @param {string} $color Icon color
+ * @param {string} $size Icon size
+ * @param {pixel} $top Top position
+ * @param {pixel} $right Right position
+ * @param {pixel} $left Left position
+ */
+icon($code, $color = $white, $size = 2em, $top = 14px, $right = 0px, $left = 15px)
+    color $color
+    content '\' + $code
+    font-family FontAwesome
+    font-size $size
+    position absolute
+    left $left
+    right $right
+    top $top
+
+/**
+ * @mixin position
+ * @description Sets a position with respectives top, right, bottom and left positions
+ * @param {string} $position Position type (absolute, relative, fixed or static)
+ * @param {array} $args Positions directions
+ */
+position($position, $args...)
+    position $position
+    if length($args) == 4
+        if $args[0] != false
+            top $args[0]
+        if $args[1] != false
+            right $args[1]
+        if $args[2] != false
+            bottom $args[2]
+        if $args[3] != false
+            left $args[3]
+    else if length($args) == 3
+        if $args[0] != false
+            top $args[0]
+        if $args[1] != false
+            right $args[1]
+        if $args[2] != false
+            bottom $args[2]
+    else if length($args) == 2
+        if $args[0] != false
+            top $args[0]
+        if $args[1] != false
+            right $args[1]
+    else
+        if $args[0] != false
+            top $args[0]
+
+/**
+ * @mixin prefix
+ * @description Sets the proper prefixes for CSS3 properties
+ * @param {string} $property CSS3 Property
+ * @param {string|pixel} $value Property value
+ */
+prefix($property, $value)
+    -webkit-{$property} $value
+    -moz-{$property} $value
+    -o-{$property} $value
+    -ms-{$property} $value
+    {$property} $value
+
+/**
+ * @mixin resetList
+ * @description Resets the margin, padding and list-style of a list (ol/ul)
+ */
+resetList()
+    list-style none
+    margin 0
+    padding 0
