@@ -11,7 +11,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
         {{#if isMobile}}
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
         {{/if}}
 
         <title>{{ __.site.title }}</title>
@@ -20,12 +20,20 @@
             <link href="{{ this }}" rel="stylesheet" />
         {{/css}}
 
-        <link rel="shortcut icon" href="images/layout/favicon.png">
+        <link rel="shortcut icon" href="images/favicon.png">
     </head>
 
     <body>
-        <header>
-            <h1>{{ __.site.title }}</h1>
+        <header class="main-header">
+            <h1 class="logo"><a href="{{ __.site.baseUrl }}"><i class="fa fa-code"></i> Coding1st</a></h1>
+
+            <nav class="main-menu">
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Topics</a></li>
+                    <li><a href="#">Categories</a></li>
+                </ul>
+            </nav>
         </header>
 
         <div class="page-content">
