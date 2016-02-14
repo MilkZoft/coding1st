@@ -1,6 +1,6 @@
 ---
 production: &default
-  serverPort: 3000
+  serverPort: 9999
   baseUrl: http://www.coding1st.com
   baseApi: /api/
   views:
@@ -25,6 +25,26 @@ production: &default
     cookiePrefix: 'c1Session_'
     path: '/'
     httpOnly: true
+  social:
+    validateSecurityToken: true
+    refreshSecurityToken: false
+    facebook:
+      account: coding1st
+      clientId: 123
+      clientSecret: xxx
+    twitter:
+      account: coding1st
+      consumerKey: xhDXVvj1SEta3dQKKmkaYfzY0
+      consumerSecret: Wkd86DPMruvye8pjYodPkWoJOYcJl206M2dG4qzqqFERrFhEK0
+      accessToken:  461804603-6g7EvCZuioUSRwwGKgONbS8QoBERDLtOyb2HaztX
+      accessTokenSecret: BiMUCpqkcDhTJYVG5RDC1JhqnN7z29SLvgN5aXIBbcnp2
+      callbackUrl: http://local.coding1st.com/auth/twitter/callback
+      requestTokenUrl: https://api.twitter.com/oauth/request_token
+      accessTokenUrl: https://api.twitter.com/oauth/access_token
+      authenticateUrl: https://twitter.com/oauth/authenticate
+      apiUrl: https://api.twitter.com/1.1/
+      apiVersion: 1.0A
+      signMethod: HMAC-SHA1
 
 stage: &stage
   <<: *default
