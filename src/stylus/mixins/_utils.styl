@@ -116,7 +116,7 @@ fontFace($fontFamily, $fontFile)
  * @param {pixel} $right Right position
  * @param {pixel} $left Left position
  */
-icon($code, $color = $white, $size = 2em, $top = 14px, $right = 0px, $left = 15px)
+icon($code, $color = $white, $size = 2em, $top = 14px, $right = 0px, $left = 15px, $width = 50px)
     color $color
     content '\' + $code
     font-family FontAwesome
@@ -125,6 +125,7 @@ icon($code, $color = $white, $size = 2em, $top = 14px, $right = 0px, $left = 15p
     left $left
     right $right
     top $top
+    width $width
 
 /**
  * @mixin position
