@@ -8,8 +8,17 @@
             "keywords": "HTML5, JavaScript, Node.js"
         }
     },
-    "welcome": "Bienvenido a",
-    "visited": "Has visitado este sitio",
-    "time": "vez",
-    "times": "veces"
+    "dashboard": {
+        "sidebar": {
+            "dashboard": "Inicio",
+            "ads": "Anuncios",
+            "blog": "Blog",
+            "config": "Configuración",
+            "feedback": "Contacto",
+            "pages": "Páginas",
+            "polls": "Encuestas",
+            "users": "Usuarios",
+            "logout": "Desconectar"
+        }
+    }
 }
