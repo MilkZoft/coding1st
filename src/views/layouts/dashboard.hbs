@@ -1,0 +1,76 @@
+{{#minify}}
+<!DOCTYPE html>
+<html lang="{{ __.site.language }}">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="content-language" content="{{ __.site.language }}" />
+        <meta name="title" content="{{ __.site.title }}" />
+        <meta name="keywords" content="{{ __.site.meta.keywords }}" />
+        <meta name="abstract" content="{{ __.site.meta.abstract }}" />
+        <meta name="description" content="{{ __.site.meta.description }}" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        {{#if isMobile}}
+            <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+        {{/if}}
+
+        <title>{{ __.site.title }}</title>
+
+        <link href="/css/dashboard/style.css" rel="stylesheet" />
+
+        <link rel="shortcut icon" href="images/favicon.png">
+    </head>
+
+    <body>
+        <header class="main-header">
+            <div class="logo">Dashboard</div>
+            <div class="user">czantany</div>
+        </header>
+
+        <section class="sidebar">
+            <ul>
+                <li class="dashboard">
+                    <a href="#" class="module">{{ __.dashboard.sidebar.dashboard }}</a>
+                    <a href="#add" class="add"><i class="fa fa-plus"></i></a>
+                </li>
+                <li class="ads">
+                    <a href="#" class="module">{{ __.dashboard.sidebar.ads }}</a>
+                    <a href="#" class="add"><i class="fa fa-plus"></i></a>
+                </li>
+                <li class="blog">
+                    <a href="#" class="module">{{ __.dashboard.sidebar.blog }}</a>
+                    <a href="#" class="add"><i class="fa fa-plus"></i></a>
+                </li>
+                <li class="config">
+                    <a href="#" class="module">{{ __.dashboard.sidebar.config }}</a>
+                    <a href="#" class="add"><i class="fa fa-plus"></i></a>
+                </li>
+                <li class="feedback">
+                    <a href="#" class="module">{{ __.dashboard.sidebar.feedback }}</a>
+                    <a href="#" class="add"><i class="fa fa-plus"></i></a>
+                </li>
+                <li class="pages">
+                    <a href="#" class="module">{{ __.dashboard.sidebar.pages }}</a>
+                    <a href="#" class="add"><i class="fa fa-plus"></i></a>
+                </li>
+                <li class="polls">
+                    <a href="#" class="module">{{ __.dashboard.sidebar.polls }}</a>
+                    <a href="#" class="add"><i class="fa fa-plus"></i></a>
+                </li>
+                <li class="users">
+                    <a href="#" class="module">{{ __.dashboard.sidebar.users }}</a>
+                    <a href="#" class="add"><i class="fa fa-plus"></i></a>
+                </li>
+                <li class="logout">
+                    <a href="#" class="module">{{ __.dashboard.sidebar.logout }}</a>
+                    <a href="#add" class="add"><i class="fa fa-plus"></i></a>
+                </li>
+            </ul>
+        </section>
+
+        <div class="content">
+            {{{ body }}}
+        </div>
+    </body>
+</html>
+{{/minify}}
