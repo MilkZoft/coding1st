@@ -12,7 +12,7 @@ module.exports = function(req, res, next) {
     var options = {
         domain: configData.cookieDomain,
         path: configData.path,
-        maxAge: configData.maxAge,
+        maxAge: new Date(Date.now() + configData.maxAge),
         httpOnly: configData.httpOnly
     };
 
