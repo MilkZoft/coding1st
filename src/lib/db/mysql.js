@@ -72,8 +72,8 @@ function findBy(obj, callback) {
     var group = (obj.group) ? ' GROUP BY ' + obj.group + ' ' : '';
     var order = (obj.order) ? ' ORDER BY ' + obj.order + ' ' : '';
     var limit = (obj.limit) ? ' LIMIT ' + obj.limit + ' ' : '';
-
     var sql = 'SELECT ' + fields + ' ';
+
     sql += 'FROM ' + obj.table + ' ';
     sql += 'WHERE ' + obj.field + ' = \'' + obj.value + '\'';
     sql += group;
@@ -83,12 +83,8 @@ function findBy(obj, callback) {
     connection.query(sql, callback);
 }
 
-function(obj, callback) {
-    if (!obj.table) {
-        return false;
-    }
-
-    if (!obj.query) {
+function findBySQL(obj, callback) {
+    if (!obj.table || !obj.query) {
         return false;
     }
 
@@ -96,8 +92,8 @@ function(obj, callback) {
     var group = (obj.group) ? ' GROUP BY ' + obj.group + ' ' : '';
     var order = (obj.order) ? ' ORDER BY ' + obj.order + ' ' : '';
     var limit = (obj.limit) ? ' LIMIT ' + obj.limit + ' ' : '';
-
     var sql = 'SELECT ' + fields + ' ';
+
     sql += 'FROM ' + obj.table + ' ';
     sql += 'WHERE ' + obj.query + ' ';
     sql += group;
