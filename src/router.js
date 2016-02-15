@@ -6,9 +6,10 @@ var availableLanguages = config().languages.list.join('|');
 module.exports = function(app) {
     // Loading controllers
     var defaultController = require('./controllers/' + config().controllers.default);
-    var homeController = require('./controllers/home');
+    var blogController = require('./controllers/blog');
     var dashboardController = require('./controllers/dashboard');
-    var authController = require('./controllers/auth')
+    var authController = require('./controllers/auth');
+    var usersController = require('./controllers/users');
 
     // Loading necessary helpers
     var i18n = require('./lib/helpers/i18n');
@@ -41,8 +42,9 @@ module.exports = function(app) {
     // Controllers dispatch
     app.use('/', defaultController);
     app.use('/auth', authController);
+    app.use('/users', usersController);
+    app.use('/dashboard', dashboardController);
     app.use('/:language(' + availableLanguages + ')', defaultController);
-    app.use('/:language(' + availableLanguages + ')/home', homeController);
     app.use('/:language(' + availableLanguages + ')/dashboard', dashboardController);
 
     // catch 404 and forward to error handler
