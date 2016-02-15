@@ -22,51 +22,8 @@
     </head>
 
     <body>
-        <header class="main-header">
-            <div class="logo">Dashboard</div>
-            <div class="user">czantany</div>
-        </header>
-
-        <section class="sidebar">
-            <ul>
-                <li class="dashboard">
-                    <a href="#" class="module">{{ __.dashboard.sidebar.dashboard }}</a>
-                    <a href="#add" class="add"><i class="fa fa-plus"></i></a>
-                </li>
-                <li class="ads">
-                    <a href="#" class="module">{{ __.dashboard.sidebar.ads }}</a>
-                    <a href="#" class="add"><i class="fa fa-plus"></i></a>
-                </li>
-                <li class="blog">
-                    <a href="#" class="module">{{ __.dashboard.sidebar.blog }}</a>
-                    <a href="#" class="add"><i class="fa fa-plus"></i></a>
-                </li>
-                <li class="config">
-                    <a href="#" class="module">{{ __.dashboard.sidebar.config }}</a>
-                    <a href="#" class="add"><i class="fa fa-plus"></i></a>
-                </li>
-                <li class="feedback">
-                    <a href="#" class="module">{{ __.dashboard.sidebar.feedback }}</a>
-                    <a href="#" class="add"><i class="fa fa-plus"></i></a>
-                </li>
-                <li class="pages">
-                    <a href="#" class="module">{{ __.dashboard.sidebar.pages }}</a>
-                    <a href="#" class="add"><i class="fa fa-plus"></i></a>
-                </li>
-                <li class="polls">
-                    <a href="#" class="module">{{ __.dashboard.sidebar.polls }}</a>
-                    <a href="#" class="add"><i class="fa fa-plus"></i></a>
-                </li>
-                <li class="users">
-                    <a href="#" class="module">{{ __.dashboard.sidebar.users }}</a>
-                    <a href="#" class="add"><i class="fa fa-plus"></i></a>
-                </li>
-                <li class="logout">
-                    <a href="#" class="module">{{ __.dashboard.sidebar.logout }}</a>
-                    <a href="#add" class="add"><i class="fa fa-plus"></i></a>
-                </li>
-            </ul>
-        </section>
+        {{> dashboard/header }}
+        {{> dashboard/sidebar }}
 
         <div class="content">
             {{{ body }}}
