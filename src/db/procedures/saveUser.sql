@@ -14,6 +14,7 @@ BEGIN
     DECLARE error VARCHAR(255);
     DECLARE success VARCHAR(255);
 
+    # If the user wants to register through the website
     IF _network = 'website' THEN
         IF (_username <> 'undefined' AND _username <> '') THEN
             IF (_password <> 'undefined' AND _password <> '') THEN

@@ -25,8 +25,7 @@ module.exports = {
 };
 
 /**
- * @name find
- * @description Find a row by specific id
+ * Find a row by specific id
  * @param {object} obj
  * @param {function} callback
  */
@@ -44,6 +43,11 @@ function find(obj, callback) {
     connection.query(sql, callback);
 }
 
+/**
+ * Finds all rows
+ * @param {object} obj
+ * @param {function} callback
+ */
 function findAll(obj, callback) {
     if (!obj.table) {
         return false;
@@ -63,6 +67,11 @@ function findAll(obj, callback) {
     connection.query(sql, callback);
 }
 
+/**
+ * Finds by specific field
+ * @param {object} obj
+ * @param {function} callback
+ */
 function findBy(obj, callback) {
     if (!obj.table) {
         return false;
@@ -83,6 +92,11 @@ function findBy(obj, callback) {
     connection.query(sql, callback);
 }
 
+/**
+ * Finds by SQL Query
+ * @param {object} obj
+ * @param {function} callback
+ */
 function findBySQL(obj, callback) {
     if (!obj.table || !obj.query) {
         return false;
@@ -103,6 +117,11 @@ function findBySQL(obj, callback) {
     connection.query(sql, callback);
 }
 
+/**
+ * Finds the first element of a table
+ * @param {object} obj
+ * @param {function} callback
+ */
 function findFirst(obj, callback) {
     if (!obj.table) {
         return false;
@@ -116,6 +135,11 @@ function findFirst(obj, callback) {
     connection.query(sql, callback);
 }
 
+/**
+ * Finds the last element of a table
+ * @param {object} obj
+ * @param {function} callback
+ */
 function findLast(obj, callback) {
     if (!obj.table || !obj.key) {
         return false;
@@ -129,6 +153,11 @@ function findLast(obj, callback) {
     connection.query(sql, callback);
 }
 
+/**
+ * Executes a SQL query
+ * @param {string} sql
+ * @param {function} callback
+ */
 function query(sql, callback) {
     if (!sql) {
         return false;

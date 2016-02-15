@@ -1,23 +1,52 @@
 'use strict';
 
+/**
+ * Dependencies
+ */
 var db = require('../db/mysql');
 var utils = require('./utils');
 var _ = require('lodash');
 
-module.exports = function(schema) {
+/**
+ * Exporting methods
+ */
+module.exports = __construct;
+
+/**
+ * Constructor
+ */
+function __construct(schema) {
     return {
         executeQuery: executeQuery,
         get: get,
         getProcedure: getProcedure,
         query: query
     };
-};
+}
 
+/**
+ * Performs a SQL Query
+ * @param {string} sql
+ * @param {function} callback
+ * @returns {string} language (es, en, etc.)
+ */
 function executeQuery(sql, callback) {
     db.query(sql, callback);
 }
 
+/**
+ * Builds a query based on the properties
+ * @param {object} q
+ * @param {function} callback
+ * @returns {boolean} || {callback}
+ */
 function get(q, callback) {
+    var fields = Object.keys(q);
+    var count = fields.length - 1;
+    var query = '';
+    var field;
+    var value;
+
     if (q === 'all') {
         schema.fields = schema.fields;
 
@@ -39,10 +68,6 @@ function get(q, callback) {
             key: schema.key
         }, callback);
     } else if (typeof(q) === 'object') {
-        var fields = Object.keys(q);
-        var count = fields.length - 1;
-        var query = '';
-
         if (fields.length > 1) {
             for (var i = 0; i <= count; i++) {
                 if (i === count) {
@@ -61,8 +86,8 @@ function get(q, callback) {
                 limit: schema.limit
             }, callback);
         } else {
-            var field = fields[0];
-            var value = q[field];
+            field = fields[0];
+            value = q[field];
 
             db.findBy({
                 field: field,
@@ -79,6 +104,14 @@ function get(q, callback) {
     return false;
 }
 
+/**
+ * Builds the SQL Query to execute a procedure with params
+ * @param {string} procedure
+ * @param {object} values
+ * @param {object} fields
+ * @param {object} filters
+ * @returns {string} SQL Procedure query
+ */
 function getProcedure(procedure, values, fields, filters) {
     var params = '';
     var i = 0;
@@ -136,6 +169,12 @@ function getProcedure(procedure, values, fields, filters) {
     return procedure.replace(new RegExp(', ,', 'g'), ', \'\',');
 }
 
+/**
+ * Performs a SQL Query
+ * @param {string} sql
+ * @param {function} callback
+ * @param {function} fn
+ */
 function query(sql, callback, fn) {
     executeQuery(sql, function(error, result) {
         fn(result, callback);

@@ -1,6 +1,11 @@
+'use strict';
+
 var express = require('express');
 var router = express.Router();
 
+/**
+ * Blog index
+ */
 router.get('/', function(req, res, next) {
     var visits = res.session('visits') || 0;
 

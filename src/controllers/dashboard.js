@@ -1,7 +1,12 @@
+'use strict';
+
 var express = require('express');
 var router = express.Router();
 var user = require('../lib/helpers/user');
 
+/**
+ * Dashboard index
+ */
 router.get('/', function(req, res, next) {
     res.profileAllowed(function(userInfo) {
         if (userInfo) {
@@ -16,6 +21,9 @@ router.get('/', function(req, res, next) {
     });
 });
 
+/**
+ * Dashboard: Ads || Add Ad
+ */
 router.get('/ads/:action*?', function(req, res, next) {
     var section = res.__.dashboard.modules.ads.name;
 
@@ -36,6 +44,9 @@ router.get('/ads/:action*?', function(req, res, next) {
     });
 });
 
+/**
+ * Dashboard: Blog || Add Post
+ */
 router.get('/blog/:action*?', function(req, res, next) {
     var section = res.__.dashboard.modules.blog.name;
 
@@ -52,6 +63,9 @@ router.get('/blog/:action*?', function(req, res, next) {
     });
 });
 
+/**
+ * Dashboard: Config
+ */
 router.get('/config', function(req, res, next) {
     res.profileAllowed(function(userInfo) {
         if (userInfo) {
@@ -66,6 +80,9 @@ router.get('/config', function(req, res, next) {
     });
 });
 
+/**
+ * Dashboard: Feedback
+ */
 router.get('/feedback', function(req, res, next) {
     res.profileAllowed(function(userInfo) {
         if (userInfo) {
@@ -80,6 +97,9 @@ router.get('/feedback', function(req, res, next) {
     });
 });
 
+/**
+ * Dashboard: Pages || Add Page
+ */
 router.get('/pages/:action*?', function(req, res, next) {
     res.profileAllowed(function(userInfo) {
         if (userInfo) {
@@ -94,6 +114,9 @@ router.get('/pages/:action*?', function(req, res, next) {
     });
 });
 
+/**
+ * Dashboard: Polls || Add Poll
+ */
 router.get('/polls/:action*?', function(req, res, next) {
     res.profileAllowed(function(userInfo) {
         if (userInfo) {
@@ -108,6 +131,9 @@ router.get('/polls/:action*?', function(req, res, next) {
     });
 });
 
+/**
+ * Dashboard: Users || Add User
+ */
 router.get('/users/:action*?', function(req, res, next) {
     res.profileAllowed(function(userInfo) {
         if (userInfo) {
