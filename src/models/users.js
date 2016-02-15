@@ -12,7 +12,7 @@ module.exports = {
 };
 
 function getPrivilege(user, callback) {
-    var procedure = Users.getProcedure('getPrivilege', user, fields1);
+    var procedure = Users.getProcedure('getUserPrivilege', user, fields1);
 
     Users.query(procedure, callback, function(result, callback) {
         var data = (result[0].length > 0) ? result[0] : false;

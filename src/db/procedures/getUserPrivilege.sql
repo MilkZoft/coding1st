@@ -1,13 +1,14 @@
-DROP PROCEDURE IF EXISTS getPrivilege;
+DROP PROCEDURE IF EXISTS getUserPrivilege;
 
 DELIMITER $$
 
-CREATE PROCEDURE getPrivilege(
-    IN _network VARCHAR(25),
-    IN _networkId VARCHAR(25),
-    IN _username VARCHAR(20),
-    IN _password VARCHAR(40))
+CREATE PROCEDURE getUserPrivilege(
+    IN _network VARCHAR(25),   # twitter, facebook or website
+    IN _networkId VARCHAR(25), # networkId just for facebook or twitter
+    IN _username VARCHAR(20),  # username
+    IN _password VARCHAR(40))  # password is optional
 BEGIN
+    # If the user has logged in through the website
     IF _network = 'website' THEN
         SELECT privilege FROM users
         WHERE username = _username
