@@ -13,8 +13,6 @@ var oauth = new OAuth(
     config().social.twitter.signMethod
 );
 
-console.log(oauth);
-
 /**
  * Exporting methods
  */
