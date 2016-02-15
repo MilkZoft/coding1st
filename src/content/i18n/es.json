@@ -9,16 +9,39 @@
         }
     },
     "dashboard": {
-        "sidebar": {
-            "dashboard": "Inicio",
-            "ads": "Anuncios",
-            "blog": "Blog",
-            "config": "Configuración",
-            "feedback": "Contacto",
-            "pages": "Páginas",
-            "polls": "Encuestas",
-            "users": "Usuarios",
-            "logout": "Desconectar"
+        "modules": {
+            "dashboard": {
+                "name": "Dashboard"
+            },
+            "ads": {
+                "name": "Anuncios",
+                "action": "Agregar nuevo anuncio"
+            },
+            "blog": {
+                "name": "Blog",
+                "action": "Agregar nueva publicación"
+            },
+            "config": {
+                "name": "Configuración"
+            },
+            "feedback": {
+                "name": "Contacto"
+            },
+            "pages": {
+                "name": "Páginas",
+                "action": "Agregar nueva página"
+            },
+            "polls": {
+                "name": "Encuestas",
+                "action": "Agregar nueva encuesta"
+            },
+            "users": {
+                "name": "Usuarios",
+                "action": "Agregar nuevo usuario"
+            },
+            "logout": {
+                "name": "Desconectar"
+            }
         }
     }
 }
