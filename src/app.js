@@ -22,12 +22,14 @@ app.use(bodyParser.urlencoded({
 var logger = require('morgan');
 app.use(logger('dev'));
 
-// Cookies / Session
+// Cookies / Session / User
 var cookieParser = require('cookie-parser');
 var session = require('./lib/helpers/session');
+var user = require('./lib/helpers/user');
 
 app.use(cookieParser());
 app.use(session);
+app.use(user);
 
 // Layout setup
 var exphbs = require('express-handlebars');
