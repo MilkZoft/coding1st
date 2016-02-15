@@ -6,16 +6,15 @@ var _ = require('lodash');
 
 module.exports = function(schema) {
     return {
-        executeQuery: executeQuery
+        executeQuery: executeQuery,
         get: get,
         getProcedure: getProcedure,
-        query: query,
+        query: query
     };
-}
+};
 
 function executeQuery(sql, callback) {
-        db.query(sql, callback);
-    }
+    db.query(sql, callback);
 }
 
 function get(q, callback) {
@@ -138,7 +137,7 @@ function getProcedure(procedure, values, fields, filters) {
 }
 
 function query(sql, callback, fn) {
-    this.executeQuery(sql, function(error, result) {
+    executeQuery(sql, function(error, result) {
         fn(result, callback);
     });
 }
