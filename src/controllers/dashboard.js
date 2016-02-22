@@ -67,6 +67,22 @@ router.get('/blog/:action*?', function(req, res, next) {
     });
 });
 
+router.post('/blog/add', function(req, res, next) {
+    var post = {
+        title           : res.post('title'),
+        slug            : res.post('slug'),
+        tags            : res.post('tags'),
+        author          : res.post('author'),
+        content         : res.post('content', 'html'),
+        codes           : res.post('codes'),
+        language        : res.post('language'),
+        activeComments  : res.post('activeComments'),
+        status          : res.post('status')
+    };
+
+    res.send(post);
+});
+
 /**
  * Dashboard: Config
  */

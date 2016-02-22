@@ -22,6 +22,10 @@ app.use(bodyParser.urlencoded({
 var logger = require('morgan');
 app.use(logger('dev'));
 
+// post
+var post = require('./lib/helpers/post');
+app.use(post);
+
 // Cookies / Session / User
 var cookieParser = require('cookie-parser');
 var session = require('./lib/helpers/session');

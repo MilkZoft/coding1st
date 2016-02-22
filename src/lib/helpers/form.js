@@ -67,6 +67,10 @@ function createTextarea(attrs) {
     }
 
     _.forIn(attrs, function(value, attr) {
+        if (attr === 'name') {
+            value = utils.md5(value);
+        }
+
         if (attr === 'value' && value !== '') {
             content = value;
         } else if (value !== '') {
@@ -97,6 +101,10 @@ function createSelect(attrs) {
     }
 
     _.forIn(attrs, function(value, attr) {
+        if (attr === 'name') {
+            value = utils.md5(value);
+        }
+
         if (attr === 'value' && value !== '') {
             content = value;
         } else if (value !== '') {
