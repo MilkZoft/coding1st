@@ -52,9 +52,13 @@ router.get('/blog/:action*?', function(req, res, next) {
 
     res.profileAllowed(function(userInfo) {
         if (userInfo) {
-            res.render('dashboard/index', {
+            if (req.params.action === 'add') {
+                section = res.__.dashboard.modules.blog.action;
+            }
+
+            res.render('dashboard/blog/add', {
                 userInfo: userInfo,
-                section: 'Blog',
+                section: section,
                 layout: 'dashboard.hbs'
             });
         } else {

@@ -1,0 +1,178 @@
+<div class="add">
+    <form action="/dashboard/blog/add" method="post">
+        <h2>{{{ icon "fa-plus" }}} {{ section }}</h2>
+
+        <div class="left-block">
+            <div class="input-block">
+                {{{
+                    label
+                        for="title"
+                        text=__.dashboard.forms.fields.title
+                }}}
+
+                <p>
+                    {{{
+                        input
+                            id="title"
+                            name="title"
+                            required=true
+                    }}}
+                </p>
+            </div>
+
+            <div class="input-block">
+                {{{
+                    label
+                        for="slug"
+                        text=__.dashboard.forms.fields.slug
+                }}}
+
+                <p>
+                    {{{
+                        input
+                            id="slug"
+                            name="slug"
+                            required=true
+                    }}}
+                </p>
+            </div>
+
+            <div class="input-block">
+                {{{
+                    label
+                        for="tags"
+                        text=__.dashboard.forms.fields.tags
+                }}}
+
+                <p>
+                    {{{
+                        input
+                            id="tags"
+                            name="tags"
+                    }}}
+                </p>
+            </div>
+
+            <div class="input-block">
+                {{{
+                    label
+                        for="author"
+                        text=__.dashboard.forms.fields.author
+                }}}
+
+                <p>
+                    {{{
+                        input
+                            id="author"
+                            name="author"
+                    }}}
+                </p>
+            </div>
+        </div>
+
+        <div class="right-block">
+            <div class="input-block">
+                {{{
+                    label
+                        for="language"
+                        text=__.dashboard.forms.fields.language
+                }}}
+
+                <p>
+                    {{{
+                        select
+                            id="language"
+                            name="language"
+                            options="english,spanish"
+                    }}}
+                </p>
+            </div>
+
+            <div class="input-block">
+                {{{
+                    label
+                        for="comments"
+                        text=__.dashboard.forms.fields.activeComments
+                }}}
+
+                <p>
+                    {{{
+                        select
+                            id="comments"
+                            name="comments"
+                            options="yes,no"
+                    }}}
+                </p>
+            </div>
+
+            <div class="input-block">
+                {{{
+                    label
+                        for="status"
+                        text=__.dashboard.forms.fields.status
+                }}}
+
+                <p>
+                    {{{
+                        select
+                            id="status"
+                            name="status"
+                            options="draft,published"
+                    }}}
+                </p>
+            </div>
+
+            <div class="input-block">
+                {{{
+                    label
+                        for="publish"
+                        text=__.dashboard.forms.fields.publish
+                }}}
+
+                <p>
+                    {{{
+                        submit
+                            id="publish"
+                            class="btn btn-success"
+                            name="publish"
+                            value=__.dashboard.forms.fields.publish
+                    }}}
+                </p>
+            </div>
+        </div>
+
+        <div class="central-block clearfix">
+            <div class="input-block">
+                {{{
+                    label
+                        for="editor"
+                        text=__.dashboard.forms.fields.content
+                }}}
+
+                <p>
+                    {{{
+                        textarea
+                            id="editor"
+                            name="content"
+                    }}}
+                </p>
+            </div>
+
+            <div class="input-block">
+                {{{
+                    label
+                        for="codes"
+                        text=__.dashboard.forms.fields.codes
+                }}}
+
+                <p>
+                    {{{
+                        textarea
+                            id="codes"
+                            name="codes"
+                    }}}
+                </p>
+            </div>
+        </div>
+    </form>
+</div>
