@@ -85,11 +85,12 @@ function createTextarea(attrs) {
  * @returns {string} html
  */
 function createSelect(attrs) {
-    var options = attrs.options.split(',');
+    var options = attrs.options.split('|');
     var html = '<select ';
     var type = attrs.type;
     var hasClass = attrs.hasOwnProperty('class');
     var content = '';
+    var value;
 
     if (!hasClass && type !== 'hidden' && type !== 'checkbox' && type !== 'radio') {
         html += 'class="select" ';
@@ -106,7 +107,14 @@ function createSelect(attrs) {
     html += '>';
 
     _.forEach(options, function(option) {
-        html += '<option>' + option + '</option>';
+        if (option.indexOf(':') > -1) {
+            value = option.substr(0, option.indexOf(':'));
+            option = option.substr(option.indexOf(':') + 1);
+
+            html += '<option value="' + value + '">' + option + '</option>';
+        } else {
+            html += '<option>' + option + '</option>';
+        }
     });
 
     html += '</select>';

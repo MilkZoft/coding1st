@@ -17,6 +17,11 @@
                 "content": "Contenido",
                 "language": "Idioma",
                 "publish": "Publicar",
+                "selects": {
+                    "decision": "yes:Si|no:No",
+                    "languages": "en:Inglés|es:Español",
+                    "status": "draft:Borrador|published:Publicado"
+                },
                 "slug": "URL Amigable",
                 "status": "Estatus",
                 "tags": "Etiquetas",

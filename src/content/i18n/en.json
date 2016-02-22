@@ -17,6 +17,11 @@
                 "content": "Content",
                 "language": "Language",
                 "publish": "Publish",
+                "selects": {
+                    "decision": "yes:Yes|no:No",
+                    "languages": "en:English|es:Spanish",
+                    "status": "draft:Draft|published:Published"
+                },
                 "slug": "Friendly URL",
                 "status": "Status",
                 "tags": "Tags",
