@@ -28,8 +28,10 @@ module.exports = {
     password: password,
     radio: radio,
     reverse: reverse,
+    select: select,
     socialButtons: socialButtons,
     submit: submit,
+    textarea: textarea,
     token: token,
     uppercase: uppercase
 };
@@ -106,16 +108,30 @@ function input(options) {
     }
 }
 
+function textarea(options) {
+    if (utils.isDefined(options.hash)) {
+        return form.createTextarea(options.hash);
+    }
+}
+
+function select(options) {
+     if (utils.isDefined(options.hash)) {
+        return form.createSelect(options.hash);
+    }
+}
+
 function submit(options) {
     if (utils.isDefined(options.hash)) {
         options.hash.type = 'submit';
 
         if (utils.isUndefined(options.hash.class)) {
-            options.hash.class = 'btn btn-danger submit';
+            options.hash.class = 'submit';
+        } else {
+            options.hash.class += ' submit';
         }
 
         return form.createInput(options.hash);
-        }
+    }
 }
 
 function password(options) {

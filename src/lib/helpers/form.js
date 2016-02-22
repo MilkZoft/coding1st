@@ -12,7 +12,9 @@ var utils = require('./utils');
  */
 module.exports = {
     createInput: createInput,
-    createLabel: createLabel
+    createLabel: createLabel,
+    createTextarea: createTextarea,
+    createSelect: createSelect
 };
 
 /**
@@ -45,6 +47,69 @@ function createInput(attrs) {
     });
 
     html += ' />';
+
+    return html;
+}
+
+/**
+ * Creates an HTML Form Textarea
+ * @param {object} attrs
+ * @returns {string} html
+ */
+function createTextarea(attrs) {
+    var html = '<textarea ';
+    var type = attrs.type;
+    var hasClass = attrs.hasOwnProperty('class');
+    var content = '';
+
+    if (!hasClass && type !== 'hidden' && type !== 'checkbox' && type !== 'radio') {
+        html += 'class="textarea" ';
+    }
+
+    _.forIn(attrs, function(value, attr) {
+        if (attr === 'value' && value !== '') {
+            content = value;
+        } else if (value !== '') {
+            html += attr + '="' + value + '" ';
+        }
+    });
+
+    html += '>' + content + '</textarea>';
+
+    return html;
+}
+
+/**
+ * Creates an HTML Form Textarea
+ * @param {object} attrs
+ * @returns {string} html
+ */
+function createSelect(attrs) {
+    var options = attrs.options.split(',');
+    var html = '<select ';
+    var type = attrs.type;
+    var hasClass = attrs.hasOwnProperty('class');
+    var content = '';
+
+    if (!hasClass && type !== 'hidden' && type !== 'checkbox' && type !== 'radio') {
+        html += 'class="select" ';
+    }
+
+    _.forIn(attrs, function(value, attr) {
+        if (attr === 'value' && value !== '') {
+            content = value;
+        } else if (value !== '') {
+            html += attr + '="' + value + '" ';
+        }
+    });
+
+    html += '>';
+
+    _.forEach(options, function(option) {
+        html += '<option>' + option + '</option>';
+    });
+
+    html += '</select>';
 
     return html;
 }
