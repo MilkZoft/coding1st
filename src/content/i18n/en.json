@@ -9,6 +9,20 @@
         }
     },
     "dashboard": {
+        "forms": {
+            "fields": {
+                "activeComments": "Active Comments?",
+                "author": "Author",
+                "codes": "Codes",
+                "content": "Content",
+                "language": "Language",
+                "publish": "Publish",
+                "slug": "Friendly URL",
+                "status": "Status",
+                "tags": "Tags",
+                "title": "Title"
+            }
+        },
         "modules": {
             "dashboard": {
                 "name": "Dashboard"
