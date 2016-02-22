@@ -21,7 +21,7 @@ production: &default
     secret: c0d1ing1st.com
   session:
     cookieDomain: .coding1st.com
-    maxAge: 6048000
+    maxAge: 259200
     cookiePrefix: 'c1Session_'
     path: '/'
     httpOnly: true
