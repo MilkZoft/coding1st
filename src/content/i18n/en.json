@@ -15,6 +15,7 @@
                 "author": "Author",
                 "codes": "Codes",
                 "content": "Content",
+                "excerpt": "Excerpt",
                 "language": "Language",
                 "publish": "Publish",
                 "selects": {
