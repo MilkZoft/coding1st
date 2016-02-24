@@ -50,6 +50,9 @@ router.get('/ads/:action*?', function(req, res, next) {
 router.get('/blog/:action*?', function(req, res, next) {
     var section = res.__.dashboard.modules.blog.name;
 
+    // Adding blog.js script
+    res.locals.bottomJs.push('/js/dashboard/blog.js');
+
     res.profileAllowed(function(userInfo) {
         if (userInfo) {
             if (req.params.action === 'add') {

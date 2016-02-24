@@ -34,7 +34,13 @@ module.exports = function(app) {
             '/css/style.css'
         ];
 
-        res.locals.js = [];
+        res.locals.topJs = [
+            '/js/vendors/ckeditor/ckeditor.js'
+        ];
+
+        res.locals.bottomJs = [
+            '/js/vendors/jqEssentials/jqEssentials.min.js'
+        ];
 
         next();
     });

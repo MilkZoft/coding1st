@@ -65,6 +65,7 @@
                         input
                             id="author"
                             name="author"
+                            value=userInfo.username
                     }}}
                 </p>
             </div>
@@ -145,14 +146,37 @@
             <div class="input-block">
                 {{{
                     label
-                        for="editor"
-                        text=__.dashboard.forms.fields.content
+                        for="excerpt"
+                        text=__.dashboard.forms.fields.excerpt
                 }}}
 
                 <p>
                     {{{
                         textarea
-                            id="editor"
+                            id="excerpt"
+                            class="editor textarea"
+                            name="excerpt"
+                    }}}
+                </p>
+            </div>
+
+            <div class="input-block">
+                {{{
+                    label
+                        for="content"
+                        text=__.dashboard.forms.fields.content
+                }}}
+
+                <p>
+                    <a class="pointer" id="include-ad"><i class="fa fa-google"></i></a>
+                    <a class="pointer" id="include-code"><i class="fa fa-code"></i></a>
+                </p>
+
+                <p>
+                    {{{
+                        textarea
+                            id="content"
+                            class="editor textarea"
                             name="content"
                     }}}
                 </p>
