@@ -2,6 +2,8 @@
 
 var config = require('../config');
 var security = require('./security');
+var dot = require('dot-object');
+var _ = require('lodash');
 
 module.exports = {
     md5: function(str) {
@@ -169,5 +171,19 @@ module.exports = {
         }
 
         return true;
+    },
+
+    buildJson: function(nodes, raw) {
+        var row = {};
+
+        _.forEach(nodes, function(node) {
+            row[node.keyName] = node.keyValue;
+        });
+
+        if (!raw) {
+            dot.object(row);
+        }
+
+        return row;
     }
 };
