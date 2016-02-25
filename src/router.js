@@ -10,12 +10,16 @@ module.exports = function(app) {
     var dashboardController = require('./controllers/dashboard');
     var authController = require('./controllers/auth');
     var usersController = require('./controllers/users');
+    var vendoController = require('./controllers/vendomatic');
 
     // Loading necessary helpers
     var i18n = require('./lib/helpers/i18n');
     var utils = require('./lib/helpers/utils');
 
-  // Loading isMobile, basePath, currentLanguage and __
+    // Vendomatic
+    app.use('/vendomatic', vendoController);
+
+    // Loading isMobile, basePath, currentLanguage and __
     app.use(function(req, res, next) {
         res.locals.isConnected = true;
         res.locals.isMobile = utils.isMobile(req.headers['user-agent']);
