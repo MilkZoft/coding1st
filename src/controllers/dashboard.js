@@ -3,6 +3,7 @@
 var express = require('express');
 var router = express.Router();
 var user = require('../lib/helpers/user');
+var blogModel = require('../models/blog');
 
 /**
  * Dashboard index
@@ -83,7 +84,27 @@ router.post('/blog/add', function(req, res, next) {
         status          : res.post('status')
     };
 
-    res.send(post);
+    var message = res.__.messages.users.register.success;
+    var alertType = 'success';
+
+    blogModel.save(post, function(status) {
+        if (utils.isUndefined(status)) {
+            res.redirect('/');
+        } else {
+            if (utils.isDefined(status[0][0].error)) {
+                message = res.__.messages.database.errors[status[0][0].error];
+                alertType = 'danger';
+                iconType = 'fa-times';
+            }
+
+            res.render('users/registered', {
+                post: post,
+                message: message,
+                alertType: alertType,
+                iconType: iconType
+            });
+        }
+    });
 });
 
 /**
