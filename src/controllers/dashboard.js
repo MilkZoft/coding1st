@@ -55,9 +55,6 @@ router.use('/blog/:action*?', function(req, res, next) {
     var message;
     var alertType;
 
-    // Adding blog.js script
-    res.locals.bottomJs.push('/js/dashboard/blog.js');
-
     if (req.params.action === 'add') {
         section = res.__.dashboard.modules.blog.action;
     }

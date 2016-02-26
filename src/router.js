@@ -43,7 +43,8 @@ module.exports = function(app) {
         ];
 
         res.locals.bottomJs = [
-            '/js/vendors/jqEssentials/jqEssentials.min.js'
+            '/js/vendors/jqEssentials/jqEssentials.min.js',
+            '/js/dashboard/main.js'
         ];
 
         next();
