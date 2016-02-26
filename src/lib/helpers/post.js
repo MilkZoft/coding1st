@@ -10,8 +10,18 @@ module.exports = function(req, res, next) {
     res.validateSecurityToken = validateSecurityToken;
     res.refreshSecurityToken = refreshSecurityToken;
     res.getAllPost = getAllPost;
+    res.isPost = isPost;
+    res.isGet = isGet;
 
     next();
+
+    function isPost() {
+        return req.method === 'POST';
+    }
+
+    function isGet() {
+        return req.method === 'GET';
+    }
 
     function getAllPost(options) {
         var values = {};
@@ -62,6 +72,9 @@ module.exports = function(req, res, next) {
 
     function getPost(input, filter) {
         var value;
+        var inputs = input;
+        var fn;
+        var posts = {};
 
         if (!filter) {
             filter = 'clean';
@@ -69,18 +82,48 @@ module.exports = function(req, res, next) {
 
         validateSecurityToken();
 
-        if (typeof post[utils.md5(input)] !== 'undefined') {
-            value = post[utils.md5(input)];
+        if (inputs instanceof Array) {
+            _.forEach(inputs, function(input) {
+                value = post[utils.md5(input)];
+                filter = input.split(':');
+                fn = input.split('|');
 
-            if (filter === 'escape') {
-                value = utils.escape(value);
-            } else if (filter === 'clean') {
-                value = utils.escape(utils.removeHTML(value));
-            }
+                if (fn[1] === 'now') {
+                    input = input.replace('|now', '');
+                    value = utils.now();
+                }
 
-            return value;
+                if (filter[1]) {
+                    input = input.replace(':' + filter[1], '');
+                    value = post[utils.md5(input)];
+
+                    if (filter[1] !== 'html') {
+                        value = utils[filter[1]](value);
+                    }
+                }
+
+                posts[input] = value;
+            });
+
+            return posts;
         } else {
-            return false;
+            if (typeof post[utils.md5(input)] !== 'undefined') {
+                value = post[utils.md5(input)];
+
+                if (filter === 'escape') {
+                    value = utils.escape(value);
+                } else if (filter === 'clean') {
+                    value = utils.escape(utils.removeHTML(value));
+                }
+
+                if (value === 'yes') {
+                    return 1;
+                }
+
+                return value === 'no' ? 0 : value;
+            } else {
+                return false;
+            }
         }
     }
 };
