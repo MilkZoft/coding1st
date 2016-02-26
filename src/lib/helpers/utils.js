@@ -185,5 +185,13 @@ module.exports = {
         }
 
         return row;
+    },
+
+    now: function() {
+        var time = Date.now || function() {
+            return +new Date;
+        };
+
+        return time();
     }
 };
