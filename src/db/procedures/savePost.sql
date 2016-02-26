@@ -9,8 +9,10 @@ CREATE PROCEDURE savePost(
     IN _content TEXT,
     IN _codes TEXT,
     IN _tags VARCHAR(255),
-    IN _createdAt DATETIME,
+    IN _author VARCHAR(50),
+    IN _createdAt INT,
     IN _language VARCHAR(2),
+    IN _activeComments INT,
     IN _estatus VARCHAR(25))
 BEGIN
     DECLARE error VARCHAR(255);
@@ -27,8 +29,10 @@ BEGIN
                         content,
                         codes,
                         tags,
+                        author,
                         createdAt,
                         language,
+                        activeComments,
                         estatus
                     ) VALUES (
                         _title,
@@ -37,12 +41,14 @@ BEGIN
                         _content,
                         _codes,
                         _tags,
+                        _author,
                         _createdAt,
                         _language,
+                        _activeComments,
                         _estatus
                     );
 
-                    SET success = 'inserted:social:username';
+                    SET success = 'inserted:post';
                     SELECT success;
                 ELSE
                     SET error = 'undefined:content';
