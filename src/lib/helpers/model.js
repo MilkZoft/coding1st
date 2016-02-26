@@ -112,7 +112,7 @@ function get(q, callback) {
  * @param {object} filters
  * @returns {string} SQL Procedure query
  */
-function getProcedure(procedure, values, fields, filters) {
+function getProcedure(procedure, values, fields, filter) {
     var params = '';
     var i = 0;
     var total = fields.length - 1;
@@ -120,8 +120,7 @@ function getProcedure(procedure, values, fields, filters) {
     var keys = _.keys(values);
     var encrypted = false;
     var method;
-
-    filters = filters || {};
+    var filters = filter || {};
 
     if (utils.isUndefined(filters)) {
         filters = {};
@@ -149,10 +148,14 @@ function getProcedure(procedure, values, fields, filters) {
         if (!utils.isNumber(value)) {
             method = filters[field];
 
-            if (utils.isDefined(method) && utils.isFunction(utils[method])) {
-                value = '\'' + utils[method](value) + '\'';
+            if (filter === false) {
+                value = '\'' + value + '\'';
             } else {
-                value = '\'' + utils.clean(value) + '\'';
+                if (utils.isDefined(method) && utils.isFunction(utils[method])) {
+                    value = '\'' + utils[method](value) + '\'';
+                } else {
+                    value = '\'' + utils.clean(value) + '\'';
+                }
             }
         }
 

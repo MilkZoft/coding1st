@@ -3,15 +3,16 @@
 var Model = require('../lib/helpers/model');
 var Blog = new Model();
 var fields = [
-    'id',
     'title',
     'slug',
     'excerpt',
     'content',
     'codes',
     'tags',
+    'author',
     'createdAt',
     'language',
+    'activeComments',
     'estatus'
 ];
 
@@ -20,7 +21,7 @@ module.exports = {
 };
 
 function save(post, callback) {
-    var procedure = Blog.getProcedure('savePost', post, fields);
+    var procedure = Blog.getProcedure('savePost', post, fields, false);
 
     Blog.query(procedure, callback, function(result, callback) {
         callback(result);

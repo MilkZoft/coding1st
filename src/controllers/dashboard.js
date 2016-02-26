@@ -4,6 +4,7 @@ var express = require('express');
 var router = express.Router();
 var user = require('../lib/helpers/user');
 var blogModel = require('../models/blog');
+var utils = require('../lib/helpers/utils');
 
 /**
  * Dashboard index
@@ -48,61 +49,64 @@ router.get('/ads/:action*?', function(req, res, next) {
 /**
  * Dashboard: Blog || Add Post
  */
-router.get('/blog/:action*?', function(req, res, next) {
+router.use('/blog/:action*?', function(req, res, next) {
     var section = res.__.dashboard.modules.blog.name;
+    var post;
+    var message;
+    var alertType;
 
     // Adding blog.js script
     res.locals.bottomJs.push('/js/dashboard/blog.js');
 
+    if (req.params.action === 'add') {
+        section = res.__.dashboard.modules.blog.action;
+    }
+
     res.profileAllowed(function(userInfo) {
         if (userInfo) {
-            if (req.params.action === 'add') {
-                section = res.__.dashboard.modules.blog.action;
-            }
+            if (res.isPost()) {
+                post = res.post([
+                    'title',
+                    'slug',
+                    'excerpt:html',
+                    'content:html',
+                    'codes',
+                    'tags',
+                    'author',
+                    'createdAt|now',
+                    'language',
+                    'activeComments',
+                    'estatus'
+                ]);
 
-            res.render('dashboard/blog/add', {
-                userInfo: userInfo,
-                section: section,
-                layout: 'dashboard.hbs'
-            });
+                message = res.__.dashboard.modules.blog.messages.add.success;
+                alertType = 'success';
+
+                blogModel.save(post, function(status) {
+                    if (utils.isUndefined(status)) {
+                        res.redirect('/');
+                    } else {
+                        if (utils.isDefined(status[0][0].error)) {
+                            message = res.__.dashboard.modules.blog.messages.add.fail;
+                        }
+
+                        res.render('dashboard/blog/add', {
+                            message: message,
+                            userInfo: userInfo,
+                            section: section,
+                            layout: 'dashboard.hbs'
+                        });
+                    }
+                });
+            } else {
+                res.render('dashboard/blog/add', {
+                    userInfo: userInfo,
+                    section: section,
+                    layout: 'dashboard.hbs'
+                });
+            }
         } else {
             res.redirect('/');
-        }
-    });
-});
-
-router.post('/blog/add', function(req, res, next) {
-    var post = {
-        title           : res.post('title'),
-        slug            : res.post('slug'),
-        tags            : res.post('tags'),
-        author          : res.post('author'),
-        content         : res.post('content', 'html'),
-        codes           : res.post('codes'),
-        language        : res.post('language'),
-        activeComments  : res.post('activeComments'),
-        status          : res.post('status')
-    };
-
-    var message = res.__.messages.users.register.success;
-    var alertType = 'success';
-
-    blogModel.save(post, function(status) {
-        if (utils.isUndefined(status)) {
-            res.redirect('/');
-        } else {
-            if (utils.isDefined(status[0][0].error)) {
-                message = res.__.messages.database.errors[status[0][0].error];
-                alertType = 'danger';
-                iconType = 'fa-times';
-            }
-
-            res.render('users/registered', {
-                post: post,
-                message: message,
-                alertType: alertType,
-                iconType: iconType
-            });
         }
     });
 });

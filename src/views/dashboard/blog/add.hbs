@@ -2,6 +2,10 @@
     <form action="/dashboard/blog/add" method="post">
         <h2>{{{ icon "fa-plus" }}} {{ section }}</h2>
 
+        {{#if message }}
+            <h3>{{{ message }}}</h3>
+        {{/if}}
+
         <div class="left-block">
             <div class="input-block">
                 {{{
@@ -109,15 +113,15 @@
             <div class="input-block">
                 {{{
                     label
-                        for="status"
+                        for="estatus"
                         text=__.dashboard.forms.fields.status
                 }}}
 
                 <p>
                     {{{
                         select
-                            id="status"
-                            name="status"
+                            id="estatus"
+                            name="estatus"
                             options=__.dashboard.forms.fields.selects.status
                     }}}
                 </p>
