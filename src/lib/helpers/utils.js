@@ -120,7 +120,7 @@ module.exports = {
 
     clean: function(str) {
         if (this.isDefined(str)) {
-            return this.removeHTML(str).replace(/[`ª´·¨Ç~¿!#$%^&*()_|+\-=?;'",<>\{\}\[\]\\]/gi, '');
+            return this.removeHTML(str).replace(/[`ª´·¨Ç~¿!#$%^&*()|+\-=?;'",<>\{\}\[\]\\]/gi, '');
         }
 
         return false;

@@ -9,5 +9,11 @@ module.exports = function() {
                 compress: true
             }))
             .pipe(gulp.dest('./src/public/css/'));
+        gulp.src('./src/stylus/dashboard/style.styl')
+            .pipe(stylus({
+                force: true,
+                compress: true
+            }))
+            .pipe(gulp.dest('./src/public/css/dashboard'));
     });
 };
