@@ -188,6 +188,10 @@ module.exports = {
         return row;
     },
 
+    pick: function(key, obj) {
+        return dot.pick(key, obj) || key;
+    },
+
     now: function() {
         return dateFormat(new Date());
     },

@@ -26,6 +26,10 @@ app.use(logger('dev'));
 var post = require('./lib/helpers/post');
 app.use(post);
 
+// content
+var content = require('./lib/helpers/content');
+app.use(content);
+
 // Cookies / Session / User
 var cookieParser = require('cookie-parser');
 var session = require('./lib/helpers/session');
