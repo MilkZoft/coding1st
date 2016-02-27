@@ -49,7 +49,7 @@ production: &default
     mysql:
       host: localhost
       user: root
-      password:
+      password: '123456'
       database: coding1st
       port: 3306
       debug: true
