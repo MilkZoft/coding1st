@@ -13,8 +13,7 @@ router.get('/', function(req, res, next) {
 
     res.render('blog/welcome', {
         siteName: 'Coding1st',
-        visits: visits,
-        username: res.session('user').username
+        visits: visits
     });
 });
 
