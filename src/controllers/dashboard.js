@@ -54,6 +54,7 @@ router.use('/blog/:action*?', function(req, res, next) {
     var post;
     var message;
     var alertType;
+    var emptyElements;
 
     if (req.params.action === 'add') {
         section = res.__.dashboard.modules.blog.action;
@@ -70,21 +71,49 @@ router.use('/blog/:action*?', function(req, res, next) {
                     'codes',
                     'tags',
                     'author',
-                    'createdAt|now',
                     'language',
                     'activeComments',
                     'estatus'
                 ]);
 
+                emptyElements = res.validate([
+                    'title',
+                    'slug',
+                    'excerpt',
+                    'content',
+                    'tags',
+                    'author'
+                ], 'empty');
+
+                post.createdAt = utils.now();
+                post.day = utils.day();
+                post.month = utils.month();
+                post.year = utils.year();
+
                 message = res.__.dashboard.modules.blog.messages.add.success;
                 alertType = 'success';
 
-                blogModel.save(post, function(status) {
-                    if (utils.isUndefined(status)) {
-                        res.redirect('/');
-                    } else {
+                if (emptyElements) {
+                    message = res.getContentFromTemplate(
+                        {'input': emptyElements},
+                        res.__.dashboard.modules.blog.messages.add.empty
+                    );
+
+                    res.render('dashboard/blog/add', {
+                        message: message,
+                        userInfo: userInfo,
+                        section: section,
+                        layout: 'dashboard.hbs'
+                    });
+                } else {
+                    blogModel.save(post, function(status) {
                         if (utils.isDefined(status[0][0].error)) {
-                            message = res.__.dashboard.modules.blog.messages.add.fail;
+                            console.log(status[0][0].error);
+                            if (status[0][0].error === 'exists:post') {
+                                message = res.__.dashboard.modules.blog.messages.add.exists;
+                            } else {
+                                message = res.__.dashboard.modules.blog.messages.add.fail;
+                            }
                         }
 
                         res.render('dashboard/blog/add', {
@@ -93,8 +122,8 @@ router.use('/blog/:action*?', function(req, res, next) {
                             section: section,
                             layout: 'dashboard.hbs'
                         });
-                    }
-                });
+                    });
+                }
             } else {
                 res.render('dashboard/blog/add', {
                     userInfo: userInfo,

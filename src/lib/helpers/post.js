@@ -12,8 +12,34 @@ module.exports = function(req, res, next) {
     res.getAllPost = getAllPost;
     res.isPost = isPost;
     res.isGet = isGet;
+    res.debug = debug;
+    res.validate = validate;
+    res.getContentFromTemplate = getContentFromTemplate;
 
     next();
+
+    function getContentFromTemplate(template, messageTemplate) {
+        return _.template(messageTemplate)(template);
+    }
+
+    function validate(inputs, validation) {
+        var element = [];
+
+        _.forEach(inputs, function(input) {
+            if (!validation || validation === 'empty') {
+                if (post[utils.md5(input)] === '') {
+                    element.push(input);
+                    return;
+                }
+            }
+        });
+
+        return element.length > 0 ? element[0] : false;
+    }
+
+    function debug(variable) {
+        res.send(variable);
+    }
 
     function isPost() {
         return req.method === 'POST';

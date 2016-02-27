@@ -11,6 +11,9 @@ var fields = [
     'tags',
     'author',
     'createdAt',
+    'day',
+    'month',
+    'year',
     'language',
     'activeComments',
     'estatus'
