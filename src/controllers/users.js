@@ -78,12 +78,12 @@ router.post('/registration', function(req, res, next) {
         if (utils.isUndefined(status)) {
             res.redirect('/');
         } else {
-            var message = res.__.messages.users.register.success;
+            var message = res.content('users.register.success');
             var alertType = 'success';
             var iconType = 'fa-check';
 
             if (utils.isDefined(status[0][0].error)) {
-                message = res.__.messages.database.errors[status[0][0].error];
+                message = res.__.db.errors[status[0][0].error];
                 alertType = 'danger';
                 iconType = 'fa-times';
             }
