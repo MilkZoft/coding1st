@@ -1,10 +1,8 @@
 'use strict';
 
-var config = require('../config');
 var htmlMinify = require('html-minifier').minify;
-var form   = require('./form');
-var utils  = require('./utils');
-var social = require('./social');
+var form = require('./form');
+var utils = require('./utils');
 
 module.exports = {
     ceil: ceil,
@@ -30,7 +28,6 @@ module.exports = {
     radio: radio,
     reverse: reverse,
     select: select,
-    socialButtons: socialButtons,
     submit: submit,
     textarea: textarea,
     token: token,
@@ -207,33 +204,4 @@ function label(options) {
 
 function icon(icon) {
     return '<i class="fa ' + icon + '"></i>';
-}
-
-function socialButtons(options) {
-    var networks = [];
-    var network = {};
-
-    if (utils.isDefined(options.hash)) {
-        if (options.hash.facebook) {
-            network = {
-                name: 'facebook',
-                text: options.hash.facebookText,
-                link: options.hash.facebookLink
-            };
-
-            networks.push(network);
-        }
-
-        if (options.hash.twitter) {
-            network = {
-                name: 'twitter',
-                text: options.hash.twitterText,
-                link: options.hash.twitterLink
-            };
-
-            networks.push(network);
-        }
-    }
-
-    return social.createButtons(networks);
 }

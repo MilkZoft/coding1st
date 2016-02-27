@@ -1,6 +1,5 @@
 'use strict';
 
-var config = require('../config');
 var _ = require('lodash');
 var utils = require('./utils');
 var post = {};
@@ -79,13 +78,13 @@ module.exports = function(req, res, next) {
     }
 
     function refreshSecurityToken() {
-        if (config().refreshSecurityToken) {
+        if ($config().refreshSecurityToken) {
             res.clearSession('securityToken');
         }
     }
 
     function validateSecurityToken() {
-        if (config().validateSecurityToken) {
+        if ($config().validateSecurityToken) {
             if (res.session('securityToken') === req.body[utils.md5('securityToken')]) {
                 post = req.body;
             } else {

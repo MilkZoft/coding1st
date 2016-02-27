@@ -3,6 +3,7 @@
 /**
  * Dependencies
  */
+var config = require($rootPath('/config'));
 var utils = require('./utils');
 var _ = require('lodash');
 
@@ -23,7 +24,7 @@ module.exports = {
 function getCurrentLanguage(url) {
     var params = utils.getParamsFromUrl(url);
 
-    return _.includes($config().languages.list, params[0]) ? params[0] : $config().languages.default;
+    return _.includes(config().languages.list, params[0]) ? params[0] : config().languages.default;
 }
 
 /**
@@ -34,7 +35,7 @@ function getCurrentLanguage(url) {
 function getLanguagePath(url) {
     var params = utils.getParamsFromUrl(url);
 
-    return _.includes($config().languages.list, params[0]) ? '/' + params[0] : '';
+    return _.includes(config().languages.list, params[0]) ? '/' + params[0] : '';
 }
 
 /**
@@ -45,14 +46,14 @@ function getLanguagePath(url) {
 function load(language) {
     var content;
 
-    if (_.includes($config().languages.list, language)) {
+    if (_.includes(config().languages.list, language)) {
         try {
             content = require('../../content/i18n/' + language);
         } catch (e) {
-            content = require('../../content/i18n/' + $config().languages.default);
+            content = require('../../content/i18n/' + config().languages.default);
         }
     } else {
-        content = require('../../content/i18n/' + $config().languages.default);
+        content = require('../../content/i18n/' + config().languages.default);
     }
 
     return content;

@@ -2,10 +2,9 @@
 
 var _ = require('lodash');
 var utils = require('./utils');
-var config = require('../config');
 
 module.exports = function(req, res, next) {
-    var configData = config().session;
+    var configData = $config().session;
     var cookiePrefix = configData.cookiePrefix;
     var sessionData = parseSession();
 

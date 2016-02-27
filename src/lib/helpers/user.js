@@ -1,6 +1,6 @@
 'use strict';
 
-var usersModel = require('../../models/users');
+var usersModel = require('../../app/users/users.model');
 var utils = require('./utils');
 
 module.exports = function(req, res, next) {

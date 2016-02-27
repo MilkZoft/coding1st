@@ -3,9 +3,8 @@
 /**
  * Dependencies
  */
-var config = require('../config');
 var crypto = require('crypto');
-var salt = config().security.secret;
+var salt = $config().security.secret;
 
 /**
  * Exporting methods

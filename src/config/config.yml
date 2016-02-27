@@ -12,7 +12,7 @@ production: &default
     css:
       stylusPrecompile: true
       compress: true
-  controllers:
+  app:
     default: blog
   languages:
     default: en

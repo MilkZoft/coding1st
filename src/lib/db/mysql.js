@@ -1,14 +1,13 @@
 'use strict';
 
 var mysql = require('mysql');
-var config = require('../config');
 
 var connection = mysql.createConnection({
-    port: config().database.mysql.port,
-    host: config().database.mysql.host,
-    user: config().database.mysql.user,
-    password: config().database.mysql.password,
-    database: config().database.mysql.database
+    port: $config().database.mysql.port,
+    host: $config().database.mysql.host,
+    user: $config().database.mysql.user,
+    password: $config().database.mysql.password,
+    database: $config().database.mysql.database
 });
 
 /**

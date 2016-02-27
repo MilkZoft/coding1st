@@ -1,6 +1,5 @@
 'use strict';
 
-var config = require('../config');
 var security = require('./security');
 var dot = require('dot-object');
 var _ = require('lodash');
@@ -28,7 +27,7 @@ module.exports = {
     },
 
     hash: function(str) {
-        if (this.isDefined(str) && config().encryptInputs) {
+        if (this.isDefined(str) && $config().encryptInputs) {
             return security.md5(str);
         }
 

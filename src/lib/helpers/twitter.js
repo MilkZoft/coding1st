@@ -1,16 +1,15 @@
 'use strict';
 
-var config = require('../config');
 var OAuth = require('oauth').OAuth;
 
 var oauth = new OAuth(
-    config().social.twitter.requestTokenUrl,
-    config().social.twitter.accessTokenUrl,
-    config().social.twitter.consumerKey,
-    config().social.twitter.consumerSecret,
-    config().social.twitter.apiVersion,
-    config().social.twitter.callbackUrl,
-    config().social.twitter.signMethod
+    $config().social.twitter.requestTokenUrl,
+    $config().social.twitter.accessTokenUrl,
+    $config().social.twitter.consumerKey,
+    $config().social.twitter.consumerSecret,
+    $config().social.twitter.apiVersion,
+    $config().social.twitter.callbackUrl,
+    $config().social.twitter.signMethod
 );
 
 /**

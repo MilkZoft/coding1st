@@ -7,8 +7,13 @@ var path = require('path');
 // Initializing express application
 var app = express();
 
+// Set rootPath
+global.$rootPath = function(dirPath) {
+    return dirPath ? path.resolve(__dirname) + dirPath : path.resolve(__dirname);
+}
+
 // Loading Config
-var config = require('./lib/config');
+global.$config = require($rootPath('/lib/config'));
 
 // Body parser
 var bodyParser = require('body-parser');
@@ -23,17 +28,17 @@ var logger = require('morgan');
 app.use(logger('dev'));
 
 // post
-var post = require('./lib/helpers/post');
+var post = require($rootPath('/lib/helpers/post'));
 app.use(post);
 
 // content
-var content = require('./lib/helpers/content');
+var content = require($rootPath('/lib/helpers/content'));
 app.use(content);
 
 // Cookies / Session / User
 var cookieParser = require('cookie-parser');
-var session = require('./lib/helpers/session');
-var user = require('./lib/helpers/user');
+var session = require($rootPath('/lib/helpers/session'));
+var user = require($rootPath('/lib/helpers/user'));
 
 app.use(cookieParser());
 app.use(session);
@@ -41,43 +46,43 @@ app.use(user);
 
 // Layout setup
 var exphbs = require('express-handlebars');
-var hbsHelpers = require('./lib/helpers/handlebars');
+var hbsHelpers = require($rootPath('/lib/helpers/handlebars'));
 
 // Stylus setup
 var stylus = require('stylus');
 
 // Compile Stylus on the fly
-if (!config().html.css.stylusPrecompile) {
+if (!$config().html.css.stylusPrecompile) {
     app.use(
         stylus.middleware({
-            src: __dirname + '/stylus',
-            dest: __dirname + '/public/css',
+            src: $rootPath('/stylus'),
+            dest: $rootPath('/public/css'),
             compile: function(str, path) {
                 return stylus(str)
                     .set('filename', path)
-                    .set('compress', config().html.css.compress);
+                    .set('compress', $config().html.css.compress);
             }
         })
     );
 }
 
 // Handlebars setup
-app.engine(config().views.engine, exphbs({
-    extname: config().views.extension,
-    defaultLayout: config().views.layout,
-    layoutsDir: __dirname + '/views/layouts',
-    partialsDir: __dirname + '/views/partials',
+app.engine($config().views.engine, exphbs({
+    extname: $config().views.extension,
+    defaultLayout: $config().views.layout,
+    layoutsDir: $rootPath('/views/layouts'),
+    partialsDir: $rootPath('/views/partials'),
     helpers: hbsHelpers
 }));
 
 // View engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', config().views.engine);
-app.use(express.static(path.join(__dirname, 'public')));
+app.set('views', path.join($rootPath(), 'views'));
+app.set('view engine', $config().views.engine);
+app.use(express.static(path.join($rootPath(), 'public')));
 
 // Sending config to templates
 app.use(function(req, res, next) {
-    res.locals.config = config();
+    res.locals.config = $config();
     next();
 });
 
@@ -85,11 +90,11 @@ app.use(function(req, res, next) {
 app.disable('x-powered-by');
 
 // dispatch router
-require('./router')(app);
+require($rootPath('/router'))(app);
 
 // Export application or start the server
 if (!!module.parent) {
     module.exports = app;
 } else {
-    app.listen(config().serverPort);
+    app.listen($config().serverPort);
 }

@@ -1,16 +1,16 @@
 'use strict';
 
-var config = require('./lib/config');
-var availableLanguages = config().languages.list.join('|');
+var availableLanguages = $config().languages.list.join('|');
+var defaultApp = $config().app.default;
 
 module.exports = function(app) {
     // Loading controllers
-    var defaultController = require('./controllers/' + config().controllers.default);
-    var blogController = require('./controllers/blog');
-    var dashboardController = require('./controllers/dashboard');
-    var authController = require('./controllers/auth');
-    var usersController = require('./controllers/users');
-    var vendoController = require('./controllers/vendomatic');
+    var defaultController = require('./app/' + defaultApp + '/' + defaultApp + '.controller');
+    var blogController = require('./app/blog/blog.controller');
+    var dashboardController = require('./app/dashboard/dashboard.controller');
+    var authController = require('./app/auth/auth.controller');
+    var usersController = require('./app/users/users.controller');
+    var vendoController = require('./app/vendomatic/vendomatic.controller');
 
     // Loading necessary helpers
     var i18n = require('./lib/helpers/i18n');
@@ -23,7 +23,7 @@ module.exports = function(app) {
     app.use(function(req, res, next) {
         res.locals.isConnected = true;
         res.locals.isMobile = utils.isMobile(req.headers['user-agent']);
-        res.locals.config.basePath = config().baseUrl + i18n.getLanguagePath(req.url);
+        res.locals.config.basePath = $config().baseUrl + i18n.getLanguagePath(req.url);
         res.locals.currentLanguage = i18n.getCurrentLanguage(req.url);
         res.__ = res.locals.__ = i18n.load(i18n.getCurrentLanguage(req.url));
         res.locals.basePath = res.locals.config.basePath;
