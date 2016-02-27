@@ -11,6 +11,7 @@ module.exports = {
     checkbox: checkbox,
     debug: debug,
     email: email,
+    flash: flash,
     gt: gt,
     gte: gte,
     hidden: hidden,
@@ -35,6 +36,10 @@ module.exports = {
     token: token,
     uppercase: uppercase
 };
+
+function flash(value) {
+    return value || '';
+}
 
 function debug(variable) {
     console.log('Debugging Handlebars:');
