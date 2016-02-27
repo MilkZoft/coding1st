@@ -6,138 +6,142 @@
             <h3>{{{ message }}}</h3>
         {{/if}}
 
-        <div class="left-block">
-            <div class="input-block">
+        <div class="leftBlock">
+            <div class="inputBlock">
                 {{{
                     label
-                        for="title"
+                        for="blogTitle"
                         text=__.dashboard.forms.fields.title
                 }}}
 
                 <p>
                     {{{
                         input
-                            id="title"
+                            id="blogTitle"
                             name="title"
                             required=true
+                            value=(flash flashData.title)
                     }}}
                 </p>
             </div>
 
-            <div class="input-block">
+            <div class="inputBlock">
                 {{{
                     label
-                        for="slug"
+                        for="blogSlug"
                         text=__.dashboard.forms.fields.slug
                 }}}
 
                 <p>
                     {{{
                         input
-                            id="slug"
+                            id="blogSlug"
                             name="slug"
                             required=true
+                            value=(flash flashData.slug)
                     }}}
                 </p>
             </div>
 
-            <div class="input-block">
+            <div class="inputBlock">
                 {{{
                     label
-                        for="tags"
+                        for="blogTags"
                         text=__.dashboard.forms.fields.tags
                 }}}
 
                 <p>
                     {{{
                         input
-                            id="tags"
+                            id="blogTags"
                             name="tags"
+                            value=(flash flashData.tags)
                     }}}
                 </p>
             </div>
 
-            <div class="input-block">
+            <div class="inputBlock">
                 {{{
                     label
-                        for="author"
+                        for="blogAuthor"
                         text=__.dashboard.forms.fields.author
                 }}}
 
                 <p>
                     {{{
                         input
-                            id="author"
+                            id="blogAuthor"
                             name="author"
                             value=userInfo.username
+                            value=(flash flashData.author)
                     }}}
                 </p>
             </div>
         </div>
 
-        <div class="right-block">
-            <div class="input-block">
+        <div class="rightBlock">
+            <div class="inputBlock">
                 {{{
                     label
-                        for="language"
+                        for="blogLanguage"
                         text=__.dashboard.forms.fields.language
                 }}}
 
                 <p>
                     {{{
                         select
-                            id="language"
+                            id="blogLanguage"
                             name="language"
                             options=__.dashboard.forms.fields.selects.languages
                     }}}
                 </p>
             </div>
 
-            <div class="input-block">
+            <div class="inputBlock">
                 {{{
                     label
-                        for="activeComments"
+                        for="blogActiveComments"
                         text=__.dashboard.forms.fields.activeComments
                 }}}
 
                 <p>
                     {{{
                         select
-                            id="activeComments"
+                            id="blogActiveComments"
                             name="activeComments"
                             options=__.dashboard.forms.fields.selects.decision
                     }}}
                 </p>
             </div>
 
-            <div class="input-block">
+            <div class="inputBlock">
                 {{{
                     label
-                        for="estatus"
+                        for="blogEstatus"
                         text=__.dashboard.forms.fields.status
                 }}}
 
                 <p>
                     {{{
                         select
-                            id="estatus"
+                            id="blogEstatus"
                             name="estatus"
                             options=__.dashboard.forms.fields.selects.status
                     }}}
                 </p>
             </div>
 
-            <div class="input-block">
+            <div class="inputBlock">
                 {{{
                     label
-                        for="publish"
+                        for="blogPublish"
                         text=__.dashboard.forms.fields.publish
                 }}}
 
                 <p>
                     {{{
                         submit
-                            id="publish"
+                            id="blogPublish"
                             class="btn btn-success"
                             name="publish"
                             value=__.dashboard.forms.fields.publish
@@ -146,8 +150,8 @@
             </div>
         </div>
 
-        <div class="central-block clearfix">
-            <div class="input-block">
+        <div class="centralBlock clearfix">
+            <div class="inputBlock">
                 {{{
                     label
                         for="excerpt"
@@ -160,11 +164,12 @@
                             id="excerpt"
                             class="editor textarea"
                             name="excerpt"
+                            value=(flash flashData.excerpt)
                     }}}
                 </p>
             </div>
 
-            <div class="input-block">
+            <div class="inputBlock">
                 {{{
                     label
                         for="content"
@@ -172,8 +177,8 @@
                 }}}
 
                 <p>
-                    <a class="pointer" id="include-ad"><i class="fa fa-google"></i></a>
-                    <a class="pointer" id="include-code"><i class="fa fa-code"></i></a>
+                    <a class="pointer" id="blogIncludeAd"><i class="fa fa-google"></i></a>
+                    <a class="pointer" id="blogIncludeCode"><i class="fa fa-code"></i></a>
                 </p>
 
                 <p>
@@ -182,22 +187,24 @@
                             id="content"
                             class="editor textarea"
                             name="content"
+                            value=(flash flashData.content)
                     }}}
                 </p>
             </div>
 
-            <div class="input-block">
+            <div class="inputBlock">
                 {{{
                     label
-                        for="codes"
+                        for="blogCodes"
                         text=__.dashboard.forms.fields.codes
                 }}}
 
                 <p>
                     {{{
                         textarea
-                            id="codes"
+                            id="blogCodes"
                             name="codes"
+                            value=(flash flashData.codes)
                     }}}
                 </p>
             </div>
