@@ -2,6 +2,7 @@
 
 var express = require('express');
 var router = express.Router();
+var _ = require('lodash');
 var user = require('../lib/helpers/user');
 var blogModel = require('../models/blog');
 var utils = require('../lib/helpers/utils');
@@ -50,18 +51,22 @@ router.get('/ads/:action*?', function(req, res, next) {
  * Dashboard: Blog || Add Post
  */
 router.use('/blog/:action*?', function(req, res, next) {
-    var section = res.__.dashboard.modules.blog.name;
+    var section = req.params.action === 'add' ?
+        res.content('dashboard.modules.blog.action') :
+        res.content('dashboard.modules.blog.name');
     var post;
     var message;
     var alertType;
     var emptyElements;
-
-    if (req.params.action === 'add') {
-        section = res.__.dashboard.modules.blog.action;
-    }
+    var renderOptions = {
+        section: section,
+        layout: 'dashboard.hbs'
+    };
 
     res.profileAllowed(function(userInfo) {
         if (userInfo) {
+            renderOptions.userInfo = userInfo;
+
             if (res.isPost()) {
                 post = res.post([
                     'title',
@@ -90,46 +95,37 @@ router.use('/blog/:action*?', function(req, res, next) {
                 post.month = utils.month();
                 post.year = utils.year();
 
-                message = res.__.dashboard.modules.blog.messages.add.success;
+                message = res.content('dashboard.modules.blog.messages.add.success');
                 alertType = 'success';
 
                 if (emptyElements) {
                     message = res.getContentFromTemplate(
                         {'input': emptyElements},
-                        res.__.dashboard.modules.blog.messages.add.empty
+                        res.content('dashboard.modules.blog.messages.add.empty')
                     );
 
-                    res.render('dashboard/blog/add', {
-                        message: message,
-                        userInfo: userInfo,
-                        section: section,
-                        layout: 'dashboard.hbs'
-                    });
+                    renderOptions.flashData = post;
+                    renderOptions.message = message;
+
+                    res.render('dashboard/blog/add', renderOptions);
                 } else {
                     blogModel.save(post, function(status) {
                         if (utils.isDefined(status[0][0].error)) {
                             console.log(status[0][0].error);
                             if (status[0][0].error === 'exists:post') {
-                                message = res.__.dashboard.modules.blog.messages.add.exists;
+                                message = res.content('dashboard.modules.blog.messages.add.exists');
                             } else {
-                                message = res.__.dashboard.modules.blog.messages.add.fail;
+                                message = res.content('dashboard.modules.blog.messages.add.fail');
                             }
                         }
 
-                        res.render('dashboard/blog/add', {
-                            message: message,
-                            userInfo: userInfo,
-                            section: section,
-                            layout: 'dashboard.hbs'
-                        });
+                        renderOptions.message = message;
+
+                        res.render('dashboard/blog/add', renderOptions);
                     });
                 }
             } else {
-                res.render('dashboard/blog/add', {
-                    userInfo: userInfo,
-                    section: section,
-                    layout: 'dashboard.hbs'
-                });
+                res.render('dashboard/blog/add', renderOptions);
             }
         } else {
             res.redirect('/');
