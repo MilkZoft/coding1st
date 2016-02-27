@@ -4,6 +4,7 @@ var config = require('../config');
 var security = require('./security');
 var dot = require('dot-object');
 var _ = require('lodash');
+var dateFormat = require('date-format');
 
 module.exports = {
     md5: function(str) {
@@ -188,10 +189,18 @@ module.exports = {
     },
 
     now: function() {
-        var time = Date.now || function() {
-            return +new Date;
-        };
+        return dateFormat(new Date());
+    },
 
-        return time();
+    day: function() {
+        return dateFormat('dd', new Date());
+    },
+
+    month: function() {
+        return dateFormat('MM', new Date());
+    },
+
+    year: function() {
+        return dateFormat('yyyy', new Date());
     }
 };
