@@ -1,20 +1,23 @@
 (function() {
     'use strict';
 
+    /**
+     * Blog functions
+     */
     // Writing the slug
-    $('#title').on('keyup', function() {
-        $('#slug').val($('#title').val(), 'slug');
+    $('#blogTitle').on('keyup', function() {
+        $('#blogSlug').val($('#blogTitle').val(), 'slug');
     });
 
     // Adding a new ad
-    $('#include-ad').on('click', function() {
+    $('#blogIncludeAd').on('click', function() {
         window.CKEDITOR.instances.content.insertHtml('[Ad:Sky]');
     });
 
     // Adding a new code
-    $('#include-code').on('click', function() {
+    $('#blogIncludeCode').on('click', function() {
         var filename = prompt('Enter the filename', 'script.js');
-        var current = $('#codes').val();
+        var current = $('#blogCodes').val();
         var code;
         var extension;
 
@@ -23,7 +26,7 @@
 
             code = '---' + extension + ':' + filename + '\n\n---\n\n';
 
-            $('#codes').val(current + code);
+            $('#blogCodes').val(current + code);
 
             window.CKEDITOR.instances.content.insertHtml('<p>{{' + filename + '}}</p>');
         }
