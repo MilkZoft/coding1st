@@ -23,11 +23,11 @@ module.exports = {
 };
 
 function api(url) {
-    return config().social.twitter.apiUrl + url;
+    return $config().social.twitter.apiUrl + url;
 }
 
 function getAuthenticateUrl(oauthToken) {
-    return config().social.twitter.authenticateUrl + '?oauth_token=' + oauthToken;
+    return $config().social.twitter.authenticateUrl + '?oauth_token=' + oauthToken;
 }
 
 function getOAuthRequestToken(callback) {

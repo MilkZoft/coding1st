@@ -25,7 +25,7 @@ function getUser(user, callback) {
     var procedure = Users.getProcedure('getUser', user, fields1);
 
     Users.query(procedure, callback, (result, callback) => {
-        var data = (result[0].length > 0) ? result[0] : false;
+        var data = (result && result[0].length > 0) ? result[0] : false;
 
         callback(data);
     });
