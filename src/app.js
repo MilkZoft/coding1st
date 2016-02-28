@@ -8,7 +8,7 @@ var path = require('path');
 var app = express();
 
 // Set rootPath
-global.$rootPath = function(dirPath) {
+global.$rootPath = (dirPath) => {
     return dirPath ? path.resolve(__dirname) + dirPath : path.resolve(__dirname);
 }
 
@@ -57,7 +57,7 @@ if (!$config().html.css.stylusPrecompile) {
         stylus.middleware({
             src: $rootPath('/stylus'),
             dest: $rootPath('/public/css'),
-            compile: function(str, path) {
+            compile: (str, path) => {
                 return stylus(str)
                     .set('filename', path)
                     .set('compress', $config().html.css.compress);
@@ -81,7 +81,7 @@ app.set('view engine', $config().views.engine);
 app.use(express.static(path.join($rootPath(), 'public')));
 
 // Sending config to templates
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
     res.locals.config = $config();
     next();
 });

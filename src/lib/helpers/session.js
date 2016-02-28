@@ -30,7 +30,7 @@ module.exports = function(req, res, next) {
     function parseSession() {
         var rVal = {};
 
-        _.forEach(req.cookies, function(value, key) {
+        _.forEach(req.cookies, (value, key) => {
             var sessionPrefix = new RegExp('^' + cookiePrefix);
             var isSessionCookie = key.search(sessionPrefix) !== -1;
 
@@ -78,7 +78,7 @@ module.exports = function(req, res, next) {
         var key = keys;
 
         if (keys instanceof Array) {
-            _.forEach(keys, function(key) {
+            _.forEach(keys, (key) => {
                 delete sessionData[key];
                 cookieKey = cookiePrefix + key;
                 res.clearCookie(cookieKey, deleteOptions);
@@ -94,7 +94,7 @@ module.exports = function(req, res, next) {
         if (sessionData) {
             var cookieKey;
 
-            _.forEach(sessionData, function(value, key) {
+            _.forEach(sessionData, (value, key) => {
                 delete sessionData[key];
 
                 cookieKey = cookiePrefix + key;

@@ -14,7 +14,7 @@ module.exports = {
 function getPrivilege(user, callback) {
     var procedure = Users.getProcedure('getUserPrivilege', user, fields1);
 
-    Users.query(procedure, callback, function(result, callback) {
+    Users.query(procedure, callback, (result, callback) => {
         var data = (result[0].length > 0) ? result[0] : false;
 
         callback(data);
@@ -24,7 +24,7 @@ function getPrivilege(user, callback) {
 function getUser(user, callback) {
     var procedure = Users.getProcedure('getUser', user, fields1);
 
-    Users.query(procedure, callback, function(result, callback) {
+    Users.query(procedure, callback, (result, callback) => {
         var data = (result[0].length > 0) ? result[0] : false;
 
         callback(data);
@@ -36,7 +36,7 @@ function save(user, callback) {
         password: 'encrypt'
     });
 
-    Users.query(procedure, callback, function(result, callback) {
+    Users.query(procedure, callback, (result, callback) => {
         callback(result);
     });
 }

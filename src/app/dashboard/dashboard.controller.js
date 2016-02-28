@@ -6,18 +6,21 @@ var _ = require('lodash');
 var user = require($rootPath('/lib/helpers/user'));
 var blogModel = require($rootPath('/app/blog/blog.model'));
 var utils = require($rootPath('/lib/helpers/utils'));
+var renderOptions = {
+    layout: 'dashboard.hbs'
+};
 
 /**
  * Dashboard index
  */
-router.get('/', function(req, res, next) {
-    res.profileAllowed(function(userInfo) {
+router.get('/', (req, res, next) => {
+    renderOptions.section = 'Dashboard';
+
+    res.profileAllowed((userInfo) => {
         if (userInfo) {
-            res.render('dashboard/index', {
-                userInfo: userInfo,
-                section: 'Dashboard',
-                layout: 'dashboard.hbs'
-            });
+            renderOptions.userInfo = userInfo;
+
+            res.render('dashboard/index', renderOptions);
         } else {
             res.redirect('/');
         }
@@ -27,20 +30,18 @@ router.get('/', function(req, res, next) {
 /**
  * Dashboard: Ads || Add Ad
  */
-router.get('/ads/:action*?', function(req, res, next) {
-    var section = res.__.dashboard.modules.ads.name;
+router.get('/ads/:action*?', (req, res, next) => {
+    renderOptions.section = res.content('dashboard.modules.ads.name');
 
-    res.profileAllowed(function(userInfo) {
+    res.profileAllowed((userInfo) => {
         if (userInfo) {
+            renderOptions.userInfo = userInfo;
+
             if (req.params.action === 'add') {
-                section = res.__.dashboard.modules.ads.action;
+                renderOptions.section = res.content('dashboard.modules.ads.action');
             }
 
-            res.render('dashboard/index', {
-                userInfo: userInfo,
-                section: section,
-                layout: 'dashboard.hbs'
-            });
+            res.render('dashboard/index', renderOptions);
         } else {
             res.redirect('/');
         }
@@ -50,20 +51,17 @@ router.get('/ads/:action*?', function(req, res, next) {
 /**
  * Dashboard: Blog || Add Post
  */
-router.use('/blog/:action*?', function(req, res, next) {
-    var section = req.params.action === 'add' ?
-        res.content('dashboard.modules.blog.action') :
-        res.content('dashboard.modules.blog.name');
+router.use('/blog/:action*?', (req, res, next) => {
     var post;
     var message;
     var alertType;
     var emptyElements;
-    var renderOptions = {
-        section: section,
-        layout: 'dashboard.hbs'
-    };
 
-    res.profileAllowed(function(userInfo) {
+    renderOptions.section = req.params.action === 'add' ?
+        res.content('dashboard.modules.blog.action') :
+        res.content('dashboard.modules.blog.name');
+
+    res.profileAllowed((userInfo) => {
         if (userInfo) {
             renderOptions.userInfo = userInfo;
 
@@ -109,9 +107,8 @@ router.use('/blog/:action*?', function(req, res, next) {
 
                     res.render('dashboard/blog/add', renderOptions);
                 } else {
-                    blogModel.save(post, function(status) {
+                    blogModel.save(post, (status) => {
                         if (utils.isDefined(status[0][0].error)) {
-                            console.log(status[0][0].error);
                             if (status[0][0].error === 'exists:post') {
                                 message = res.content('dashboard.modules.blog.messages.add.exists');
                             } else {
@@ -136,14 +133,14 @@ router.use('/blog/:action*?', function(req, res, next) {
 /**
  * Dashboard: Config
  */
-router.get('/config', function(req, res, next) {
-    res.profileAllowed(function(userInfo) {
+router.get('/config', (req, res, next) => {
+    renderOptions.section = 'Config';
+
+    res.profileAllowed((userInfo) => {
         if (userInfo) {
-            res.render('dashboard/index', {
-                userInfo: userInfo,
-                section: 'Config',
-                layout: 'dashboard.hbs'
-            });
+            renderOptions.userInfo = userInfo;
+
+            res.render('dashboard/index', renderOptions);
         } else {
             res.redirect('/');
         }
@@ -153,14 +150,14 @@ router.get('/config', function(req, res, next) {
 /**
  * Dashboard: Feedback
  */
-router.get('/feedback', function(req, res, next) {
-    res.profileAllowed(function(userInfo) {
+router.get('/feedback', (req, res, next) => {
+    renderOptions.section = 'Feedback';
+
+    res.profileAllowed((userInfo) => {
         if (userInfo) {
-            res.render('dashboard/index', {
-                userInfo: userInfo,
-                section: 'Feedback',
-                layout: 'dashboard.hbs'
-            });
+            renderOptions.userInfo = userInfo;
+
+            res.render('dashboard/index', renderOptions);
         } else {
             res.redirect('/');
         }
@@ -170,14 +167,14 @@ router.get('/feedback', function(req, res, next) {
 /**
  * Dashboard: Pages || Add Page
  */
-router.get('/pages/:action*?', function(req, res, next) {
-    res.profileAllowed(function(userInfo) {
+router.get('/pages/:action*?', (req, res, next) => {
+    renderOptions.section = 'Pages';
+
+    res.profileAllowed((userInfo) => {
         if (userInfo) {
-            res.render('dashboard/index', {
-                userInfo: userInfo,
-                section: 'Pages',
-                layout: 'dashboard.hbs'
-            });
+            renderOptions.userInfo = userInfo;
+
+            res.render('dashboard/index', renderOptions);
         } else {
             res.redirect('/');
         }
@@ -187,14 +184,14 @@ router.get('/pages/:action*?', function(req, res, next) {
 /**
  * Dashboard: Polls || Add Poll
  */
-router.get('/polls/:action*?', function(req, res, next) {
-    res.profileAllowed(function(userInfo) {
+router.get('/polls/:action*?', (req, res, next) => {
+    renderOptions.section = 'Polls';
+
+    res.profileAllowed((userInfo) => {
         if (userInfo) {
-            res.render('dashboard/index', {
-                userInfo: userInfo,
-                section: 'Polls',
-                layout: 'dashboard.hbs'
-            });
+            renderOptions.userInfo = userInfo;
+
+            res.render('dashboard/index', renderOptions);
         } else {
             res.redirect('/');
         }
@@ -204,14 +201,14 @@ router.get('/polls/:action*?', function(req, res, next) {
 /**
  * Dashboard: Users || Add User
  */
-router.get('/users/:action*?', function(req, res, next) {
-    res.profileAllowed(function(userInfo) {
+router.get('/users/:action*?', (req, res, next) => {
+    renderOptions.section = 'Users';
+
+    res.profileAllowed((userInfo) => {
         if (userInfo) {
-            res.render('dashboard/index', {
-                userInfo: userInfo,
-                section: 'Users',
-                layout: 'dashboard.hbs'
-            });
+            renderOptions.userInfo = userInfo;
+
+            res.render('dashboard/index', renderOptions);
         } else {
             res.redirect('/');
         }

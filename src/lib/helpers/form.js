@@ -35,7 +35,7 @@ function createInput(attrs) {
         html += 'class="input" ';
     }
 
-    _.forIn(attrs, function(value, attr) {
+    _.forIn(attrs, (value, attr) => {
         if (attr === 'name') {
             value = utils.md5(value);
         }
@@ -65,7 +65,7 @@ function createTextarea(attrs) {
         html += 'class="textarea" ';
     }
 
-    _.forIn(attrs, function(value, attr) {
+    _.forIn(attrs, (value, attr) => {
         if (attr === 'name') {
             value = utils.md5(value);
         }
@@ -99,7 +99,7 @@ function createSelect(attrs) {
         html += 'class="select" ';
     }
 
-    _.forIn(attrs, function(value, attr) {
+    _.forIn(attrs, (value, attr) => {
         if (attr === 'name') {
             value = utils.md5(value);
         }
@@ -113,7 +113,7 @@ function createSelect(attrs) {
 
     html += '>';
 
-    _.forEach(options, function(option) {
+    _.forEach(options, (option) => {
         if (option.indexOf(':') > -1) {
             value = option.substr(0, option.indexOf(':'));
             option = option.substr(option.indexOf(':') + 1);
@@ -137,7 +137,7 @@ function createSelect(attrs) {
 function createLabel(attrs, text) {
     var html = '<label ';
 
-    _.forIn(attrs, function(value, attr) {
+    _.forIn(attrs, (value, attr) => {
         html += attr + '="' + value + '" ';
     });
 

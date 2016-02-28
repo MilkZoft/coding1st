@@ -3,7 +3,7 @@
 var availableLanguages = $config().languages.list.join('|');
 var defaultApp = $config().app.default;
 
-module.exports = function(app) {
+module.exports = (app) => {
     // Loading controllers
     var defaultController = require('./app/' + defaultApp + '/' + defaultApp + '.controller');
     var blogController = require('./app/blog/blog.controller');
@@ -20,7 +20,7 @@ module.exports = function(app) {
     app.use('/vendomatic', vendoController);
 
     // Loading isMobile, basePath, currentLanguage and __
-    app.use(function(req, res, next) {
+    app.use((req, res, next) => {
         res.locals.isConnected = true;
         res.locals.isMobile = utils.isMobile(req.headers['user-agent']);
         res.locals.config.basePath = $config().baseUrl + i18n.getLanguagePath(req.url);
@@ -33,7 +33,7 @@ module.exports = function(app) {
     });
 
     // default css and js
-    app.use(function(req, res, next) {
+    app.use((req, res, next) => {
         res.locals.css = [
             '/css/style.css'
         ];
@@ -59,7 +59,7 @@ module.exports = function(app) {
     app.use('/:language(' + availableLanguages + ')/dashboard', dashboardController);
 
     // catch 404 and forward to error handler
-    app.use(function(req, res, next) {
+    app.use((req, res, next) => {
         var err = new Error('Not Found');
         err.status = 404;
         next(err);
@@ -68,7 +68,7 @@ module.exports = function(app) {
     // development error handler
     // will print stacktrace
     if (app.get('env') === 'development') {
-        app.use(function(err, req, res, next) {
+        app.use((err, req, res, next) => {
             res.status(err.status || 500);
             res.render('error', {
                 message: err.message,
@@ -79,7 +79,7 @@ module.exports = function(app) {
 
     // production error handler
     // no stacktraces leaked to user
-    app.use(function(err, req, res, next) {
+    app.use((err, req, res, next) => {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,

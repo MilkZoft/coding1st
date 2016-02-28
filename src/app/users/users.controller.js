@@ -4,11 +4,12 @@ var express = require('express');
 var router = express.Router();
 var usersModel = require('./users.model');
 var utils = require($rootPath('/lib/helpers/utils'));
+var renderOptions = {};
 
 /**
  * Validates that the user is connected
  */
-router.get('/validation', function(req, res, next) {
+router.get('/validation', (req, res, next) => {
     if (utils.isDefined(res.session('user')) && utils.isDefined(res.session('oauth'))) {
         var connectedUser = res.session('user');
 
@@ -17,7 +18,7 @@ router.get('/validation', function(req, res, next) {
             networkId: connectedUser.networkId,
             username: connectedUser.username,
             password: false
-        }, function(userInfo) {
+        }, (userInfo) => {
             if (userInfo) {
                 res.redirect('/');
             } else {
@@ -32,7 +33,7 @@ router.get('/validation', function(req, res, next) {
 /**
  * Logout: destroy sessions.
  */
-router.get('/logout', function(req, res, next) {
+router.get('/logout', (req, res, next) => {
     res.destroySessions();
 
     res.redirect('/');
@@ -41,38 +42,36 @@ router.get('/logout', function(req, res, next) {
 /**
  * Renders login view
  */
-router.get('/login', function(req, res, next) {
+router.get('/login', (req, res, next) => {
     res.render('users/login');
 });
 
 /**
  * Renders register view
  */
-router.get('/register', function(req, res, next) {
+router.get('/register', (req, res, next) => {
     if (utils.isDefined(res.session('user')) && utils.isDefined(res.session('oauth'))) {
         var connectedUser = res.session('user');
 
         res.clearSession(['user', 'oauth']);
 
-        res.render('users/register', {
-            user: connectedUser
-        });
+        renderOptions.user = connectedUser;
+
+        res.render('users/register', renderOptions);
     } else {
-        res.render('users/register', {
-            user: false
-        });
+        renderOptions.user = false;
+
+        res.render('users/register', renderOptions);
     }
 });
-
-/// GET Actions ///
 
 /**
  * Register a new user
  */
-router.post('/registration', function(req, res, next) {
+router.post('/registration', (req, res, next) => {
     var post = res.getAllPost();
 
-    usersModel.save(post, function(status) {
+    usersModel.save(post, (status) => {
         if (utils.isUndefined(status)) {
             res.redirect('/');
         } else {
@@ -81,16 +80,12 @@ router.post('/registration', function(req, res, next) {
             var iconType = 'fa-check';
 
             if (utils.isDefined(status[0][0].error)) {
-                message = res.__.db.errors[status[0][0].error];
-                alertType = 'danger';
-                iconType = 'fa-times';
+                renderOptions.message = res.__.db.errors[status[0][0].error];
+                renderOptions.alertType = 'danger';
+                renderOptions.iconType = 'fa-times';
             }
 
-            res.render('users/registered', {
-                message: message,
-                alertType: alertType,
-                iconType: iconType
-            });
+            res.render('users/registered', renderOptions);
         }
     });
 });

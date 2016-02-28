@@ -2,19 +2,18 @@
 
 var express = require('express');
 var router = express.Router();
+var renderOptions = {};
 
 /**
  * Blog index
  */
-router.get('/', function(req, res, next) {
-    var visits = res.session('visits') || 0;
+router.get('/', (req, res, next) => {
+    renderOptions.siteName = 'Coding1st';
+    renderOptions.visits = res.session('visits') || 0;
 
     res.session('visits', ++visits);
 
-    res.render('blog/welcome', {
-        siteName: 'Coding1st',
-        visits: visits
-    });
+    res.render('blog/welcome', renderOptions);
 });
 
 module.exports = router;

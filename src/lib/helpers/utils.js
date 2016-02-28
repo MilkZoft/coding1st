@@ -1,9 +1,9 @@
 'use strict';
 
-var security = require('./security');
-var dot = require('dot-object');
 var _ = require('lodash');
 var dateFormat = require('date-format');
+var dot = require('dot-object');
+var security = require('./security');
 
 module.exports = {
     md5: function(str) {

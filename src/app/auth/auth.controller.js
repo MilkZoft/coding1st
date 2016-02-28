@@ -7,8 +7,8 @@ var twitter = require($rootPath('/lib/helpers/twitter'));
 /**
  * Redirects to twitter to do the login
  */
-router.get('/twitter', function(req, res) {
-    twitter.getOAuthRequestToken(function(tokens) {
+router.get('/twitter', (req, res) => {
+    twitter.getOAuthRequestToken((tokens) => {
         var oauthSession = {
             'token': tokens[0],
             'tokenSecret': tokens[1]
@@ -22,7 +22,7 @@ router.get('/twitter', function(req, res) {
 /**
  * If twitter login was successful, we save oauth & user sessions
  */
-router.get('/twitter/callback', function(req, res) {
+router.get('/twitter/callback', (req, res) => {
     var oauthData = res.session('oauth');
 
     if (oauthData) {
@@ -32,7 +32,7 @@ router.get('/twitter/callback', function(req, res) {
             oauthData.token,
             oauthData.tokenSecret,
             oauthVerifier,
-            function(sessions) {
+            (sessions) => {
                 res.session('oauth', sessions[0]);
                 res.session('user', sessions[1]);
 

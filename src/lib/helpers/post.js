@@ -4,7 +4,7 @@ var _ = require('lodash');
 var utils = require('./utils');
 var post = {};
 
-module.exports = function(req, res, next) {
+module.exports = (req, res, next) => {
     res.post = getPost;
     res.validateSecurityToken = validateSecurityToken;
     res.refreshSecurityToken = refreshSecurityToken;
@@ -24,7 +24,7 @@ module.exports = function(req, res, next) {
     function validate(inputs, validation) {
         var element = [];
 
-        _.forEach(inputs, function(input) {
+        _.forEach(inputs, (input) => {
             if (!validation || validation === 'empty') {
                 if (post[utils.md5(input)] === '') {
                     element.push(input);
@@ -62,7 +62,7 @@ module.exports = function(req, res, next) {
             };
         }
 
-        _.forEach(post, function(value, key) {
+        _.forEach(post, (value, key) => {
             if (options.exclude.length > 0) {
                 if (!_.includes(options.exclude, key)) {
                     values[key] = value;
@@ -108,7 +108,7 @@ module.exports = function(req, res, next) {
         validateSecurityToken();
 
         if (inputs instanceof Array) {
-            _.forEach(inputs, function(input) {
+            _.forEach(inputs, (input) => {
                 value = post[utils.md5(input)];
                 filter = input.split(':');
                 fn = input.split('|');

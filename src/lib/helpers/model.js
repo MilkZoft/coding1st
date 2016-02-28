@@ -130,7 +130,7 @@ function getProcedure(procedure, values, fields, filter) {
         encrypted = true;
     }
 
-    _.forEach(fields, function(field) {
+    _.forEach(fields, (field) => {
         value = values[(encrypted) ? utils.md5(field) : field];
 
         if (value === 'on') {
@@ -179,7 +179,7 @@ function getProcedure(procedure, values, fields, filter) {
  * @param {function} fn
  */
 function query(sql, callback, fn) {
-    executeQuery(sql, function(error, result) {
+    executeQuery(sql, (error, result) => {
         fn(result, callback);
     });
 }

@@ -31,7 +31,7 @@ function getAuthenticateUrl(oauthToken) {
 }
 
 function getOAuthRequestToken(callback) {
-    oauth.getOAuthRequestToken(function(error, oauthToken, oauthTokenSecret, results) {
+    oauth.getOAuthRequestToken((error, oauthToken, oauthTokenSecret, results) => {
         if (error) {
             console.log(error);
         } else {
@@ -42,7 +42,7 @@ function getOAuthRequestToken(callback) {
 
 function getOAuthAccessToken(token, tokenSecret, oauthVerifier, callback) {
     oauth.getOAuthAccessToken(token, tokenSecret, oauthVerifier,
-        function(error, oauthAccessToken, oauthAccessTokenSecret, results) {
+        (error, oauthAccessToken, oauthAccessTokenSecret, results) => {
             if (error) {
                 console.log(error);
                 return false;
@@ -57,7 +57,7 @@ function getOAuthAccessToken(token, tokenSecret, oauthVerifier, callback) {
                     oauthAccessToken,
                     oauthAccessTokenSecret,
 
-                    function(error, data) {
+                    (error, data) => {
                         data = JSON.parse(data);
 
                         var userSession = {

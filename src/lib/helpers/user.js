@@ -3,7 +3,7 @@
 var usersModel = require('../../app/users/users.model');
 var utils = require('./utils');
 
-module.exports = function(req, res, next) {
+module.exports = (req, res, next) => {
     res.profileAllowed = profileAllowed;
 
     next();
@@ -17,7 +17,7 @@ module.exports = function(req, res, next) {
                 networkId: connectedUser.networkId,
                 username: connectedUser.username,
                 password: false
-            }, function(userInfo) {
+            }, (userInfo) => {
                 callback(userInfo[0].privilege !== 'user' ? connectedUser : false);
             });
         } else {

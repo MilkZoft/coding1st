@@ -26,7 +26,7 @@ module.exports = {
 function save(post, callback) {
     var procedure = Blog.getProcedure('savePost', post, fields, false);
 
-    Blog.query(procedure, callback, function(result, callback) {
+    Blog.query(procedure, callback, (result, callback) => {
         callback(result);
     });
 }

@@ -9,10 +9,10 @@ var availableLanguages = $config().languages.list.join('|');
 /**
  * Vendomatic
  */
-router.get('/:language(' + availableLanguages + ').json', function(req, res, next) {
+router.get('/:language(' + availableLanguages + ').json', (req, res, next) => {
     vendoModel.getVendoContent({
         language: req.params.language
-    }, function(vendoContent) {
+    }, (vendoContent) => {
         if (vendoContent) {
             res.send(utils.buildJson(vendoContent));
         } else {
@@ -21,10 +21,10 @@ router.get('/:language(' + availableLanguages + ').json', function(req, res, nex
     });
 });
 
-router.get('/:language(' + availableLanguages + ')', function(req, res, next) {
+router.get('/:language(' + availableLanguages + ')', (req, res, next) => {
     vendoModel.getVendoContent({
         language: req.params.language
-    }, function(vendoContent) {
+    }, (vendoContent) => {
         if (vendoContent) {
             res.send(utils.buildJson(vendoContent, true));
         } else {
