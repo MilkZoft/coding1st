@@ -10,11 +10,11 @@ var exphbs;
 var stylus;
 
 // Helpers
-var post;
-var content;
-var session;
-var user;
-var hbsHelpers;
+var postHelper;
+var contentHelper;
+var sessionHelper;
+var userHelper;
+var hbsHelper;
 
 // Loading dependencies
 express = require('express');
@@ -34,11 +34,11 @@ global.$rootPath = (dirPath) => {
 global.$config = require('./lib/config');
 
 // Loading Helpers
-post = require('./lib/helpers/post');
-content = require('./lib/helpers/content');
-session = require('./lib/helpers/session');
-user = require('./lib/helpers/user');
-hbsHelpers = require('./lib/helpers/handlebars');
+postHelper = require('./lib/helpers/post');
+contentHelper = require('./lib/helpers/content');
+sessionHelper = require('./lib/helpers/session');
+userHelper = require('./lib/helpers/user');
+hbsHelper = require('./lib/helpers/handlebars');
 
 // Body parser
 app.use(bodyParser.json());
@@ -47,15 +47,15 @@ app.use(bodyParser.urlencoded({
 }));
 
 // post
-app.use(post);
+app.use(postHelper);
 
 // content
-app.use(content);
+app.use(contentHelper);
 
 // Cookies / Session / User
 app.use(cookieParser());
-app.use(session);
-app.use(user);
+app.use(sessionHelper);
+app.use(userHelper);
 
 // Compile Stylus on the fly
 if (!$config().html.css.stylusPrecompile) {
@@ -78,7 +78,7 @@ app.engine($config().views.engine, exphbs({
     defaultLayout: $config().views.layout,
     layoutsDir: $rootPath('/views/layouts'),
     partialsDir: $rootPath('/views/partials'),
-    helpers: hbsHelpers
+    helpers: hbsHelper
 }));
 
 // View engine setup
