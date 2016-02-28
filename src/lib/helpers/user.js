@@ -18,7 +18,11 @@ module.exports = (req, res, next) => {
                 username: connectedUser.username,
                 password: false
             }, (userInfo) => {
-                callback(userInfo[0].privilege !== 'user' ? connectedUser : false);
+                if (userInfo) {
+                    callback(userInfo[0].privilege !== 'user' ? connectedUser : false);
+                } else {
+                    res.redirect('/');
+                }
             });
         } else {
             callback(false);
