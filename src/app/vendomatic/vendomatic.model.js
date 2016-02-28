@@ -2,7 +2,6 @@
 
 var Model = require($rootPath('/lib/helpers/model'));
 var Vendomatic = new Model();
-var fields = ['keyName', 'keyValue', 'language'];
 
 module.exports = {
     getVendoContent: getVendoContent

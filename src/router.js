@@ -52,11 +52,13 @@ module.exports = (app) => {
 
     // Controllers dispatch
     app.use('/', defaultController);
-    app.use('/auth', authController);
-    app.use('/users', usersController);
-    app.use('/dashboard', dashboardController);
     app.use('/:language(' + availableLanguages + ')', defaultController);
+    app.use('/:language(' + availableLanguages + ')/blog', blogController);
     app.use('/:language(' + availableLanguages + ')/dashboard', dashboardController);
+    app.use('/auth', authController);
+    app.use('/blog', blogController);
+    app.use('/dashboard', dashboardController);
+    app.use('/users', usersController);
 
     // catch 404 and forward to error handler
     app.use((req, res, next) => {

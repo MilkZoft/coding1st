@@ -46,6 +46,7 @@ function get(q, callback) {
     var query = '';
     var field;
     var value;
+    var i;
 
     if (q === 'all') {
         schema.fields = schema.fields;
@@ -69,7 +70,7 @@ function get(q, callback) {
         }, callback);
     } else if (typeof(q) === 'object') {
         if (fields.length > 1) {
-            for (var i = 0; i <= count; i++) {
+            for (i = 0; i <= count; i++) {
                 if (i === count) {
                     query += fields[i] + ' = \'' + q[fields[i]] + '\'';
                 } else {
@@ -132,10 +133,6 @@ function getProcedure(procedure, values, fields, filter) {
 
     _.forEach(fields, (field) => {
         value = values[(encrypted) ? utils.md5(field) : field];
-
-        if (value === 'on') {
-            value = 1;
-        }
 
         if (utils.isUndefined(value)) {
             value = '';

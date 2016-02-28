@@ -10,8 +10,10 @@ var renderOptions = {};
  * Validates that the user is connected
  */
 router.get('/validation', (req, res, next) => {
+    var connectedUser;
+
     if (utils.isDefined(res.session('user')) && utils.isDefined(res.session('oauth'))) {
-        var connectedUser = res.session('user');
+        connectedUser = res.session('user');
 
         usersModel.getUser({
             network: connectedUser.network,
@@ -50,8 +52,10 @@ router.get('/login', (req, res, next) => {
  * Renders register view
  */
 router.get('/register', (req, res, next) => {
+    var connectedUser;
+
     if (utils.isDefined(res.session('user')) && utils.isDefined(res.session('oauth'))) {
-        var connectedUser = res.session('user');
+        connectedUser = res.session('user');
 
         res.clearSession(['user', 'oauth']);
 
@@ -75,9 +79,9 @@ router.post('/registration', (req, res, next) => {
         if (utils.isUndefined(status)) {
             res.redirect('/');
         } else {
-            var message = res.content('users.register.success');
-            var alertType = 'success';
-            var iconType = 'fa-check';
+            renderOptions.message = res.content('users.register.success');
+            renderOptions.alertType = 'success';
+            renderOptions.iconType = 'fa-check';
 
             if (utils.isDefined(status[0][0].error)) {
                 renderOptions.message = res.__.db.errors[status[0][0].error];

@@ -7,7 +7,6 @@ var utils = require('./utils');
 module.exports = {
     ceil: ceil,
     checkbox: checkbox,
-    debug: debug,
     email: email,
     flash: flash,
     gt: gt,
@@ -36,16 +35,6 @@ module.exports = {
 
 function flash(value) {
     return value || '';
-}
-
-function debug(variable) {
-    console.log('Debugging Handlebars:');
-    console.log('=====================');
-    console.log(this);
-
-    console.log('Dumping Variable:');
-    console.log('========================');
-    console.log(variable);
 }
 
 function lowercase(str) {
@@ -117,7 +106,7 @@ function textarea(options) {
 }
 
 function select(options) {
-     if (utils.isDefined(options.hash)) {
+    if (utils.isDefined(options.hash)) {
         return form.createSelect(options.hash);
     }
 }
@@ -170,8 +159,8 @@ function token(securityToken) {
     var options = {};
 
     if (utils.isDefined(securityToken)) {
-        options.type  = 'hidden';
-        options.name  = 'securityToken';
+        options.type = 'hidden';
+        options.name = 'securityToken';
         options.value = securityToken;
 
         return form.createInput(options);
@@ -196,9 +185,7 @@ function radio(options) {
 
 function label(options) {
     if (utils.isDefined(options.hash)) {
-        var labelText = (options.hash.text) ? options.hash.text : '';
-
-        return form.createLabel(options.hash, labelText);
+        return form.createLabel(options.hash, (options.hash.text) ? options.hash.text : '');
     }
 }
 

@@ -84,11 +84,12 @@ module.exports = {
     randomCode: function(max, charSet) {
         var randomCode = '';
         var randomPoz;
+        var i;
 
         max = max || 12;
         charSet = charSet || 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
-        for (var i = 0; i < max; i++) {
+        for (i = 0; i < max; i++) {
             randomPoz = Math.floor(Math.random() * charSet.length);
             randomCode += charSet.substring(randomPoz, randomPoz + 1);
         }
@@ -126,10 +127,6 @@ module.exports = {
     },
 
     convertSecondsToHHMMSS: function(seconds) {
-        if (!seconds) {
-            return '00:00:00';
-        }
-
         var time;
         var hours = Math.floor(seconds / 3600);
         var minutes = Math.floor((seconds - (hours * 3600)) / 60);
@@ -150,7 +147,7 @@ module.exports = {
 
         time = hours + ':' + minutes + ':' + seconds;
 
-        return time;
+        return !seconds ? '00:00:00' : time;
     },
 
     convertCamelToNatural: function(str) {

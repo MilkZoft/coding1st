@@ -29,12 +29,15 @@ module.exports = {
  * @param {function} callback
  */
 function find(obj, callback) {
+    var fields;
+    var sql;
+
     if (!obj.id || !obj.table) {
         return false;
     }
 
-    var fields = (obj.fields) ? obj.fields : '*';
-    var sql = 'SELECT ' + fields + ' ';
+    fields = (obj.fields) ? obj.fields : '*';
+    sql = 'SELECT ' + fields + ' ';
 
     sql += 'FROM ' + obj.table + ' ';
     sql += 'WHERE ' + obj.key + ' = ' + obj.id;
@@ -48,15 +51,21 @@ function find(obj, callback) {
  * @param {function} callback
  */
 function findAll(obj, callback) {
+    var fields;
+    var group;
+    var order;
+    var limit;
+    var sql;
+
     if (!obj.table) {
         return false;
     }
 
-    var fields = (obj.fields) ? obj.fields : '*';
-    var group = (obj.group) ? ' GROUP BY ' + obj.group + ' ' : '';
-    var order = (obj.order) ? ' ORDER BY ' + obj.order + ' ' : '';
-    var limit = (obj.limit) ? ' LIMIT ' + obj.limit + ' ' : '';
-    var sql = 'SELECT ' + fields + ' ';
+    fields = (obj.fields) ? obj.fields : '*';
+    group = (obj.group) ? ' GROUP BY ' + obj.group + ' ' : '';
+    order = (obj.order) ? ' ORDER BY ' + obj.order + ' ' : '';
+    limit = (obj.limit) ? ' LIMIT ' + obj.limit + ' ' : '';
+    sql = 'SELECT ' + fields + ' ';
 
     sql += 'FROM ' + obj.table + ' ';
     sql += group;
@@ -72,15 +81,21 @@ function findAll(obj, callback) {
  * @param {function} callback
  */
 function findBy(obj, callback) {
+    var fields;
+    var group;
+    var order;
+    var limit;
+    var sql;
+
     if (!obj.table) {
         return false;
     }
 
-    var fields = (obj.fields) ? obj.fields : '*';
-    var group = (obj.group) ? ' GROUP BY ' + obj.group + ' ' : '';
-    var order = (obj.order) ? ' ORDER BY ' + obj.order + ' ' : '';
-    var limit = (obj.limit) ? ' LIMIT ' + obj.limit + ' ' : '';
-    var sql = 'SELECT ' + fields + ' ';
+    fields = (obj.fields) ? obj.fields : '*';
+    group = (obj.group) ? ' GROUP BY ' + obj.group + ' ' : '';
+    order = (obj.order) ? ' ORDER BY ' + obj.order + ' ' : '';
+    limit = (obj.limit) ? ' LIMIT ' + obj.limit + ' ' : '';
+    sql = 'SELECT ' + fields + ' ';
 
     sql += 'FROM ' + obj.table + ' ';
     sql += 'WHERE ' + obj.field + ' = \'' + obj.value + '\'';
@@ -97,15 +112,21 @@ function findBy(obj, callback) {
  * @param {function} callback
  */
 function findBySQL(obj, callback) {
+    var fields;
+    var group;
+    var order;
+    var limit;
+    var sql;
+
     if (!obj.table || !obj.query) {
         return false;
     }
 
-    var fields = (obj.fields) ? obj.fields : '*';
-    var group = (obj.group) ? ' GROUP BY ' + obj.group + ' ' : '';
-    var order = (obj.order) ? ' ORDER BY ' + obj.order + ' ' : '';
-    var limit = (obj.limit) ? ' LIMIT ' + obj.limit + ' ' : '';
-    var sql = 'SELECT ' + fields + ' ';
+    fields = (obj.fields) ? obj.fields : '*';
+    group = (obj.group) ? ' GROUP BY ' + obj.group + ' ' : '';
+    order = (obj.order) ? ' ORDER BY ' + obj.order + ' ' : '';
+    limit = (obj.limit) ? ' LIMIT ' + obj.limit + ' ' : '';
+    sql = 'SELECT ' + fields + ' ';
 
     sql += 'FROM ' + obj.table + ' ';
     sql += 'WHERE ' + obj.query + ' ';
@@ -122,12 +143,15 @@ function findBySQL(obj, callback) {
  * @param {function} callback
  */
 function findFirst(obj, callback) {
+    var fields;
+    var sql;
+
     if (!obj.table) {
         return false;
     }
 
-    var fields = (obj.fields) ? obj.fields : '*';
-    var sql = 'SELECT ' + fields + ' ';
+    fields = (obj.fields) ? obj.fields : '*';
+    sql = 'SELECT ' + fields + ' ';
     sql += 'FROM ' + obj.table + ' ';
     sql += 'LIMIT 1';
 
@@ -140,12 +164,15 @@ function findFirst(obj, callback) {
  * @param {function} callback
  */
 function findLast(obj, callback) {
+    var fields;
+    var sql;
+
     if (!obj.table || !obj.key) {
         return false;
     }
 
-    var fields = (obj.fields) ? obj.fields : '*';
-    var sql = 'SELECT ' + fields + ' ';
+    fields = (obj.fields) ? obj.fields : '*';
+    sql = 'SELECT ' + fields + ' ';
     sql += 'FROM ' + obj.table + ' ';
     sql += 'ORDER BY ' + obj.key + ' DESC LIMIT 1';
 

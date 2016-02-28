@@ -27,7 +27,6 @@ stylus = require('stylus');
 
 // Set rootPath
 global.$rootPath = (dirPath) => {
-    console.log('DIRPATH', path.resolve(__dirname) + dirPath);
     return dirPath ? path.resolve(__dirname) + dirPath : path.resolve(__dirname);
 };
 
@@ -100,8 +99,8 @@ app.disable('x-powered-by');
 require($rootPath('/router'))(app);
 
 // Export application or start the server
-if (!!module.parent) {
-    module.exports = app;
-} else {
+if (!module.parent) {
     app.listen($config().serverPort);
 }
+
+module.exports = app;

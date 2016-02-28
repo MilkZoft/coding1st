@@ -1,7 +1,7 @@
 'use strict';
 
 var express = require('express');
-var router  = express.Router();
+var router = express.Router();
 var twitter = require($rootPath('/lib/helpers/twitter'));
 
 /**
@@ -24,9 +24,10 @@ router.get('/twitter', (req, res) => {
  */
 router.get('/twitter/callback', (req, res) => {
     var oauthData = res.session('oauth');
+    var oauthVerifier;
 
     if (oauthData) {
-        var oauthVerifier = req.query['oauth_verifier'];
+        oauthVerifier = req.query.oauth_verifier;
 
         twitter.getOAuthAccessToken(
             oauthData.token,

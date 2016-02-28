@@ -2,8 +2,6 @@
 
 var express = require('express');
 var router = express.Router();
-var _ = require('lodash');
-var user = require($rootPath('/lib/helpers/user'));
 var blogModel = require($rootPath('/app/blog/blog.model'));
 var utils = require($rootPath('/lib/helpers/utils'));
 var renderOptions = {
@@ -54,7 +52,6 @@ router.get('/ads/:action*?', (req, res, next) => {
 router.use('/blog/:action*?', (req, res, next) => {
     var post;
     var message;
-    var alertType;
     var emptyElements;
 
     renderOptions.section = req.params.action === 'add' ?
@@ -94,7 +91,6 @@ router.use('/blog/:action*?', (req, res, next) => {
                 post.year = utils.year();
 
                 message = res.content('dashboard.modules.blog.messages.add.success');
-                alertType = 'success';
 
                 if (emptyElements) {
                     message = res.getContentFromTemplate(

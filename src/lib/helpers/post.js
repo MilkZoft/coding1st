@@ -131,24 +131,24 @@ module.exports = (req, res, next) => {
             });
 
             return posts;
-        } else {
-            if (typeof post[utils.md5(input)] !== 'undefined') {
-                value = post[utils.md5(input)];
-
-                if (filter === 'escape') {
-                    value = utils.escape(value);
-                } else if (filter === 'clean') {
-                    value = utils.escape(utils.removeHTML(value));
-                }
-
-                if (value === 'yes') {
-                    return 1;
-                }
-
-                return value === 'no' ? 0 : value;
-            } else {
-                return false;
-            }
         }
+
+        if (typeof post[utils.md5(input)] !== 'undefined') {
+            value = post[utils.md5(input)];
+
+            if (filter === 'escape') {
+                value = utils.escape(value);
+            } else if (filter === 'clean') {
+                value = utils.escape(utils.removeHTML(value));
+            }
+
+            if (value === 'yes') {
+                return 1;
+            }
+
+            return value === 'no' ? 0 : value;
+        }
+
+        return false;
     }
 };

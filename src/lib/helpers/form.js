@@ -92,7 +92,6 @@ function createSelect(attrs) {
     var html = '<select ';
     var type = attrs.type;
     var hasClass = attrs.hasOwnProperty('class');
-    var content = '';
     var value;
 
     if (!hasClass && type !== 'hidden' && type !== 'checkbox' && type !== 'radio') {
@@ -104,9 +103,7 @@ function createSelect(attrs) {
             value = utils.md5(value);
         }
 
-        if (attr === 'value' && value !== '') {
-            content = value;
-        } else if (value !== '') {
+        if (value !== '') {
             html += attr + '="' + value + '" ';
         }
     });

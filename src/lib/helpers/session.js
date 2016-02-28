@@ -49,7 +49,6 @@ module.exports = function(req, res, next) {
     }
 
     function session(key, value) {
-        var domain;
         var cookieKey;
         var cookieValue;
 
@@ -91,9 +90,9 @@ module.exports = function(req, res, next) {
     }
 
     function destroySessions() {
-        if (sessionData) {
-            var cookieKey;
+        var cookieKey;
 
+        if (sessionData) {
             _.forEach(sessionData, (value, key) => {
                 delete sessionData[key];
 

@@ -32,9 +32,7 @@ function getAuthenticateUrl(oauthToken) {
 
 function getOAuthRequestToken(callback) {
     oauth.getOAuthRequestToken((error, oauthToken, oauthTokenSecret, results) => {
-        if (error) {
-            console.log(error);
-        } else {
+        if (!error) {
             return callback([oauthToken, oauthTokenSecret]);
         }
     });
@@ -43,11 +41,11 @@ function getOAuthRequestToken(callback) {
 function getOAuthAccessToken(token, tokenSecret, oauthVerifier, callback) {
     oauth.getOAuthAccessToken(token, tokenSecret, oauthVerifier,
         (error, oauthAccessToken, oauthAccessTokenSecret, results) => {
-            if (error) {
-                console.log(error);
-                return false;
-            } else {
-                var oauthSession = {
+            var oauthSession;
+            var userSession;
+
+            if (!error) {
+                oauthSession = {
                     'token': oauthAccessToken,
                     'tokenSecret': oauthAccessTokenSecret
                 };
@@ -60,11 +58,11 @@ function getOAuthAccessToken(token, tokenSecret, oauthVerifier, callback) {
                     (error, data) => {
                         data = JSON.parse(data);
 
-                        var userSession = {
-                            'networkId': data['id'],
+                        userSession = {
+                            'networkId': data.id,
                             'network'  : 'twitter',
-                            'username' : data['screen_name'],
-                            'avatar'   : data['profile_image_url']
+                            'username' : data.screen_name,
+                            'avatar'   : data.profile_image_url
                         };
 
                         return callback([oauthSession, userSession]);
