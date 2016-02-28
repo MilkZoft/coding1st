@@ -1,55 +1,62 @@
 'use strict';
 
-// Loading dependencies
-var express = require('express');
-var path = require('path');
+// Dependencies
+var express;
+var path;
+var app;
+var bodyParser;
+var cookieParser;
+var exphbs;
+var stylus;
 
-// Initializing express application
-var app = express();
+// Helpers
+var post;
+var content;
+var session;
+var user;
+var hbsHelpers;
+
+// Loading dependencies
+express = require('express');
+app = express();
+path = require('path');
+bodyParser = require('body-parser');
+cookieParser = require('cookie-parser');
+exphbs = require('express-handlebars');
+stylus = require('stylus');
 
 // Set rootPath
 global.$rootPath = (dirPath) => {
+    console.log('DIRPATH', path.resolve(__dirname) + dirPath);
     return dirPath ? path.resolve(__dirname) + dirPath : path.resolve(__dirname);
-}
+};
 
 // Loading Config
-global.$config = require($rootPath('/lib/config'));
+global.$config = require('./lib/config');
+
+// Loading Helpers
+post = require('./lib/helpers/post');
+content = require('./lib/helpers/content');
+session = require('./lib/helpers/session');
+user = require('./lib/helpers/user');
+hbsHelpers = require('./lib/helpers/handlebars');
 
 // Body parser
-var bodyParser = require('body-parser');
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }));
 
-// Logger
-var logger = require('morgan');
-app.use(logger('dev'));
-
 // post
-var post = require($rootPath('/lib/helpers/post'));
 app.use(post);
 
 // content
-var content = require($rootPath('/lib/helpers/content'));
 app.use(content);
 
 // Cookies / Session / User
-var cookieParser = require('cookie-parser');
-var session = require($rootPath('/lib/helpers/session'));
-var user = require($rootPath('/lib/helpers/user'));
-
 app.use(cookieParser());
 app.use(session);
 app.use(user);
-
-// Layout setup
-var exphbs = require('express-handlebars');
-var hbsHelpers = require($rootPath('/lib/helpers/handlebars'));
-
-// Stylus setup
-var stylus = require('stylus');
 
 // Compile Stylus on the fly
 if (!$config().html.css.stylusPrecompile) {

@@ -3,7 +3,7 @@
 /**
  * Dependencies
  */
-var db = require($rootPath('/lib/db/mysql'));
+var db = require('../db/mysql');
 var utils = require('./utils');
 var _ = require('lodash');
 

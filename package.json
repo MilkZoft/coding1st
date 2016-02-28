@@ -16,14 +16,12 @@
     "morgan": "~1.6.1",
     "mysql": "^2.10.2",
     "oauth": "^0.9.14",
-    "react": "^0.14.7",
     "stylus": "^0.53.0"
   },
   "devDependencies": {
     "bower": "^1.7.7",
     "chai": "^3.5.0",
     "eslint": "^1.10.3",
-    "eslint-plugin-react": "^3.16.1",
     "gulp": "^3.9.0",
     "gulp-eslint": "^1.1.1",
     "gulp-json-format": "^1.0.0",
@@ -31,7 +29,6 @@
     "gulp-remote-src": "^0.4.0",
     "gulp-shell": "^0.5.2",
     "gulp-stylus": "^2.3.0",
-    "mocha": "^2.4.5",
-    "react-addons-test-utils": "^0.14.7"
+    "mocha": "^2.4.5"
   }
 }
