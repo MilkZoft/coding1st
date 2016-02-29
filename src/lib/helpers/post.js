@@ -14,8 +14,13 @@ module.exports = (req, res, next) => {
     res.debug = debug;
     res.validate = validate;
     res.getContentFromTemplate = getContentFromTemplate;
+    res.action = action;
 
     next();
+
+    function action() {
+        return req.params.action === 'add' || req.params.action === 'edit' ? req.params.action : 'view';
+    }
 
     function getContentFromTemplate(template, messageTemplate) {
         return _.template(messageTemplate)(template);

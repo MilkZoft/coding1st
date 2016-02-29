@@ -1,28 +1,29 @@
 'use strict';
 
 // Dependencies
-var express;
-var path;
 var app;
 var bodyParser;
 var cookieParser;
 var exphbs;
+var express;
+var path;
 var stylus;
 
 // Helpers
-var postHelper;
 var contentHelper;
-var sessionHelper;
-var userHelper;
 var hbsHelper;
+var postHelper;
+var sessionHelper;
+var templatesHelper;
+var userHelper;
 
 // Loading dependencies
 express = require('express');
 app = express();
-path = require('path');
 bodyParser = require('body-parser');
 cookieParser = require('cookie-parser');
 exphbs = require('express-handlebars');
+path = require('path');
 stylus = require('stylus');
 
 // Set rootPath
@@ -34,17 +35,21 @@ global.$rootPath = (dirPath) => {
 global.$config = require('./lib/config');
 
 // Loading Helpers
-postHelper = require('./lib/helpers/post');
 contentHelper = require('./lib/helpers/content');
-sessionHelper = require('./lib/helpers/session');
-userHelper = require('./lib/helpers/user');
 hbsHelper = require('./lib/helpers/handlebars');
+postHelper = require('./lib/helpers/post');
+sessionHelper = require('./lib/helpers/session');
+templatesHelper = require('./lib/helpers/templates');
+userHelper = require('./lib/helpers/user');
 
 // Body parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }));
+
+// templates
+app.use(templatesHelper);
 
 // post
 app.use(postHelper);

@@ -7,6 +7,7 @@ module.exports = (app) => {
     // Loading controllers
     var defaultController = require('./app/' + defaultApp + '/' + defaultApp + '.controller');
     var blogController = require('./app/blog/blog.controller');
+    var blogDashboard = require('./app/blog/blog.dashboard');
     var dashboardController = require('./app/dashboard/dashboard.controller');
     var authController = require('./app/auth/auth.controller');
     var usersController = require('./app/users/users.controller');
@@ -49,6 +50,9 @@ module.exports = (app) => {
 
         next();
     });
+
+    // Dashboard actions
+    app.use(blogDashboard);
 
     // Controllers dispatch
     app.use('/', defaultController);
