@@ -31,6 +31,8 @@
     "gulp-shell": "^0.5.2",
     "gulp-stylus": "^2.3.0",
     "guppy-pre-push": "^0.2.1",
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "rewire": "^2.5.1",
+    "sinon": "^1.17.3"
   }
 }
