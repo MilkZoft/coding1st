@@ -7,7 +7,9 @@ var router = express.Router();
  * Dashboard index
  */
 router.get('/', (req, res, next) => {
-
+    res.render('dashboard/index', {
+        layout: 'dashboard.hbs'
+    });
 });
 
 /**
