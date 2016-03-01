@@ -28,6 +28,7 @@ module.exports = (req, res, next) => {
                     res.content('dashboard.modules.blog.action') :
                     res.content('dashboard.modules.blog.name')
             );
+            res.renderScope.set('multimedia', utils.glob($rootPath('/public/images/uploads/')));
 
             if (userInfo) {
                 if (res.isPost()) {
