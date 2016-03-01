@@ -13,6 +13,7 @@ module.exports = {
     convertSecondsToHHMMSS: convertSecondsToHHMMSS,
     day: day,
     encrypt: encrypt,
+    escape: escaping,
     getCurrentDevice: getCurrentDevice,
     getParamsFromUrl: getParamsFromUrl,
     glob: glob,
@@ -127,7 +128,7 @@ function removeHTML(str) {
     return false;
 }
 
-function escape(str) {
+function escaping(str) {
     if (isDefined(str)) {
         return str
             .replace(/'/g, '\\\'')
