@@ -9,11 +9,9 @@ var security = require('./security');
 module.exports = {
     buildJson: buildJson,
     clean: clean,
-    convertCamelToNatural: convertCamelToNatural,
-    convertSecondsToHHMMSS: convertSecondsToHHMMSS,
     day: day,
     encrypt: encrypt,
-    escape: escaping,
+    escape: escape,
     getCurrentDevice: getCurrentDevice,
     getParamsFromUrl: getParamsFromUrl,
     glob: glob,
@@ -36,6 +34,89 @@ module.exports = {
     sha1: sha1,
     year: year
 };
+
+/**
+ * @name buildJson
+ * @description Builds a json from vendomatic content
+ * @param {object} nodes
+ * @param {boolean} raw
+ * @returns {object} vendomatic json
+ */
+function buildJson(nodes, raw) {
+    var row = {};
+
+    _.forEach(nodes, (node) => {
+        row[node.keyName] = node.keyValue;
+    });
+
+    if (!raw) {
+        dot.object(row);
+    }
+
+    return row;
+}
+
+/**
+ * @name clean
+ * @description Cleans a string
+ * @param {string} str
+ * @returns {string || boolean} Cleaned string
+ */
+function clean(str) {
+    if (isDefined(str)) {
+        return removeHTML(str).replace(/[`ª´·¨Ç~¿!#$%^&*()|+\-=?;'",<>\{\}\[\]\\]/gi, '');
+    }
+
+    return false;
+}
+
+/**
+ * @name day
+ * @description Returns the current day
+ * @returns {string} Current Day
+ */
+function day() {
+    return dateFormat('dd', new Date());
+}
+
+/**
+ * @name encrypt
+ * @description Returns a sha1(md5) hash with salt
+ * @param {string} str String
+ * @returns {string} Salted Hash
+ */
+function encrypt(str) {
+    return security.sha1(security.md5(str));
+}
+
+/**
+ * @name escape
+ * @description Escapes a string
+ * @param {string} str String
+ * @returns {string || boolean} Escaped string
+ */
+function escape(str) {
+    if (isDefined(str)) {
+        return str
+            .replace(/'/g, '\\\'')
+            .replace(/"/g, '\\\\"')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+    }
+
+    return false;
+}
+
+/**
+ * @name getCurrentDevice
+ * @description Validates if a device is a mobile or desktop
+ * @param {string} ua User Agent
+ * @returns {string} mobile or desktop
+ */
+function getCurrentDevice(ua) {
+    return (/mobile/i.test(ua)) ? 'mobile' : 'desktop';
+}
 
 function isFunction(func) {
     return typeof func === 'function';
@@ -69,10 +150,6 @@ function sha1(str) {
     return false;
 }
 
-function encrypt(str) {
-    return security.sha1(security.md5(str));
-}
-
 function isYear(year) {
     return typeof year !== 'undefined' && year.length === 4 && !isNaN(year);
 }
@@ -91,10 +168,6 @@ function isDesktop(ua) {
 
 function isMobile(ua) {
     return (/mobile/i.test(ua));
-}
-
-function getCurrentDevice(ua) {
-    return (/mobile/i.test(ua)) ? 'mobile' : 'desktop';
 }
 
 function getParamsFromUrl(params) {
@@ -128,57 +201,6 @@ function removeHTML(str) {
     return false;
 }
 
-function escaping(str) {
-    if (isDefined(str)) {
-        return str
-            .replace(/'/g, '\\\'')
-            .replace(/"/g, '\\\\"')
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;');
-    }
-
-    return false;
-}
-
-function clean(str) {
-    if (isDefined(str)) {
-        return removeHTML(str).replace(/[`ª´·¨Ç~¿!#$%^&*()|+\-=?;'",<>\{\}\[\]\\]/gi, '');
-    }
-
-    return false;
-}
-
-function convertSecondsToHHMMSS(seconds) {
-    var time;
-    var hours = Math.floor(seconds / 3600);
-    var minutes = Math.floor((seconds - (hours * 3600)) / 60);
-
-    seconds = seconds - (hours * 3600) - (minutes * 60);
-
-    if (hours < 10) {
-        hours = '0' + hours;
-    }
-
-    if (minutes < 10) {
-        minutes = '0' + minutes;
-    }
-
-    if (seconds < 10) {
-        seconds = '0' + seconds;
-    }
-
-    time = hours + ':' + minutes + ':' + seconds;
-
-    return !seconds ? '00:00:00' : time;
-}
-
-function convertCamelToNatural(str) {
-    str = str.charAt(0).toUpperCase() + str.slice(1);
-
-    return str.split(/(?=[A-Z])/).join(' ');
-}
-
 function isJson(str) {
     if (str === null) {
         return false;
@@ -193,30 +215,12 @@ function isJson(str) {
     return true;
 }
 
-function buildJson(nodes, raw) {
-    var row = {};
-
-    _.forEach(nodes, (node) => {
-        row[node.keyName] = node.keyValue;
-    });
-
-    if (!raw) {
-        dot.object(row);
-    }
-
-    return row;
-}
-
 function pick(key, obj) {
     return dot.pick(key, obj) || key;
 }
 
 function now() {
     return dateFormat(new Date());
-}
-
-function day() {
-    return dateFormat('dd', new Date());
 }
 
 function month() {

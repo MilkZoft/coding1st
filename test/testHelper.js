@@ -5,6 +5,7 @@ var rewire = require('rewire');
 
 global.sinon = require('sinon');
 global.assert = require('chai').assert;
+global.$config = rewire(__dirname + '/../src/lib/config');
 
 module.exports = {
     rewireFromProjectRoot: function(relativePath) {
