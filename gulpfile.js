@@ -9,7 +9,7 @@ gulp.task('vendo', require('./gulp/vendo'));
 // Tasks
 gulp.task('analyze', ['lint']);
 gulp.task('test', ['mocha']);
-gulp.task('pre-push', ['lint']);
+gulp.task('pre-push', ['lint', 'test']);
 
 // Watch
 gulp.task('watch', ['stylus'], function() {
