@@ -10,7 +10,7 @@ module.exports = (req, res, next) => {
     next();
 
     function content(contentKey, base) {
-        if (base) {
+        if (base) {
             contentBase = contentKey;
         } else if (contentBase) {
             contentKey = contentBase + '.' + contentKey;
