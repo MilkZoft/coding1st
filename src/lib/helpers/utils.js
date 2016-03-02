@@ -227,24 +227,34 @@ function year() {
     return dateFormat('yyyy', new Date());
 }
 
-function glob(dir, _files) {
+function glob(dir, _files, urls) {
     var files = fs.readdirSync(dir);
     var i;
     var name;
+    var tmp;
+    var url;
 
     _files = _files || [];
+    urls = urls || [];
 
     for (i in files) {
-        if (files[i] !== '.DS_Store') {
-            name = dir + files[i];
+        if (files[i] !== '.DS_Store' || files[i] !== '.gitkeep') {
+            name = dir + '/' + files[i];
 
             if (fs.statSync(name).isDirectory()) {
-                getFiles(name, files_);
+                glob(name, _files, urls);
             } else {
-                _files.push(name);
+                tmp = name.split('/public/');
+
+                if (isDefined(tmp[1])) {
+                    url = $config().baseUrl + '/' + tmp[1];
+
+                    _files.push(name);
+                    urls.push(url);
+                }
             }
         }
     }
 
-    return _files;
+    return urls;
 }

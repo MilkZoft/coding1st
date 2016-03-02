@@ -15,6 +15,7 @@ module.exports = (req, res, next) => {
 
     function defaultScope(scope) {
         defaultOptions = scope;
+        renderOptions = _.cloneDeep(defaultOptions);
     }
 
     function get(key) {
