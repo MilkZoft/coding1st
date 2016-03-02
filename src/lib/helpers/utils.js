@@ -238,7 +238,7 @@ function glob(dir, _files, urls) {
     urls = urls || [];
 
     for (i in files) {
-        if (files[i] !== '.DS_Store' || files[i] !== '.gitkeep') {
+        if (files[i] !== '.DS_Store' && files[i] !== '.gitkeep') {
             name = dir + '/' + files[i];
 
             if (fs.statSync(name).isDirectory()) {
