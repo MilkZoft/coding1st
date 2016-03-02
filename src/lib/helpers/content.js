@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
     function content(contentKey, base) {
         if (base) {
             contentBase = contentKey;
-        } else if (contentBase) {
+        } else if (contentBase && utils.pick(contentKey, res.__) === contentKey) {
             contentKey = contentBase + '.' + contentKey;
         }
 
